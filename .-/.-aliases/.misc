@@ -51,9 +51,14 @@ fi
 # OS specific aliases below
 
 if ( os_is darwin ); then
-	# OSX 
+	# OSX
     # Remove Where From tag from mp3
     alias remove_where_tag="xattr -d com.apple.metadata:kMDItemWhereFroms ./*.*"
+    
+    
+	# Grant or remove admin rights
+	alias admin_on='sudo dseditgroup -o edit -a $USER -t user admin'
+	alias admin_off='sudo dseditgroup -o edit -d $USER -t user admin'
     
 	# Desktop Programs
 	alias safari="open -a safari"
