@@ -9,6 +9,9 @@ for aliasFile in $DOTCWD/.-aliases/.*; do
     [ -r $aliasFile ] && [ -f $aliasFile ] && . $aliasFile && alias ${aliasFile/*.-aliases\//.-.aliases}="$EDITOR $aliasFile" 
 done;
 
+# Update the .- dotfiles repo
+alias .-.git_update="(cd $DOTCWD/../; git pull origin master)"
+
 # Profiles - Open for editing
 alias bash_profile='$EDITOR ~/.bash_profile'
 alias bash_login='$EDITOR ~/.bash_login'

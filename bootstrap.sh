@@ -31,8 +31,8 @@ removeDotSource() {
     awk '/#.-/{getline;next} 1' $1 > $1.tmp && mv $1.tmp $1
 }
 
-# Check where we should add #._.
-# WHen Bash is invoked as n interactive shell it loads the first script in order of
+# Check where we should add #.-
+# When Bash is invoked as n interactive shell it loads the first script in order of
 # ~/.bash_profile, ~/.bash_login, and ~/.profile, in that order
 if [ -f $DOTBASHPROFILEPATH ]
 then
