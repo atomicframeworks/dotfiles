@@ -40,11 +40,12 @@ exists() {
         CONFIGVAR=$CONFIGVAR=
         echo ".- Config setting: $CONFIGVAR$2";
     
-        if grep -Fq "$CONFIGVAR" $DOTCWD/../config.cfg
+        if grep -Fqi "$CONFIGVAR" $DOTCWD/../config.cfg
         then
             # The config flag is found in config file
             # Now remove it
-            awk "/$CONFIGVAR/{getline} 1" $DOTCWD/../config.cfg > $DOTCWD/../config.tmp && mv $DOTCWD/../config.tmp $DOTCWD/../config.cfg
+            echo "Now remove it"
+            sed -i "" -e "/$CONFIGVAR/d" $DOTCWD/../config.cfg
         else
             # The config flag is NOT found in config file
             # Safe to just add it
