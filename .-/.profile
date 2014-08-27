@@ -20,6 +20,6 @@ done;
 
 # Manually add profile and bootstrap aliases as part of core profile
 alias .-.profile="$EDITOR $DOTCWD/.profile";
-alias .-.bootstrap="$EDITOR $DOTCWD/../boostrap.sh";
+alias .-.bootstrap="$EDITOR $DOTCWD/../bootstrap.sh";
 
 test "$DOTSILENT" == false && echo -e '*\t\t\t\t\t*\n*****************************************\n';
