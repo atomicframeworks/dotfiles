@@ -1,0 +1,12 @@
+# .-.path can be used to extend $PATH
+
+test "$DOTSILENT" == false && echo -e '*  .- Path\t\t\t\t*'
+
+# Path - Add ~/bin
+export PATH="$HOME/bin:$PATH";
+
+# Path - Add rbenv (bin & shims)
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+
+# Path - Add MongoDB
+export PATH="$HOME/bin/mongodb/bin:$PATH"

@@ -1,0 +1,33 @@
+# .-.exports can be used for adding any export calls
+
+test "$DOTSILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
+
+# EDITOR - Export default editor based on what is available for the OS
+if ( os_is darwin ); then
+	# OSX
+	if ( exists mate ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tTextMate\t\t*'
+		export EDITOR="mate"	
+	elif ( exists nano ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tNano\t\t*'        
+		export EDITOR="/usr/bin/nano"
+	elif ( exists vim ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
+		export EDITOR="/usr/bin/vim"
+	elif ( exists vi ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
+		export EDITOR="/usr/bin/vi" 
+	fi
+elif ( os_is linux ); then
+	# Linux	
+	if ( exists nano ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tNano\t\t*'        
+		export EDITOR="/usr/bin/nano"
+	elif ( exists vim ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
+		export EDITOR="/usr/bin/vim"
+	elif ( exists vi ); then
+		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
+		export EDITOR="/usr/bin/vi"
+	fi
+fi

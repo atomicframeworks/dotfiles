@@ -1,0 +1,40 @@
+# .-.aliases can be used to add generic aliases
+# More specific aliases can be added in the .-aliases folder
+# Any . files in the .-aliases folder are automatically bootstrapped and included
+
+test "$DOTSILENT" == false && echo -e '*  .- Aliases\t\t\t\t*'
+
+# Load all dot files in .-aliases folder
+for aliasFile in $DOTCWD/.-aliases/.*; do
+    [ -r $aliasFile ] && [ -f $aliasFile ] && . $aliasFile && alias ${aliasFile/*.-aliases\//.-.aliases}="$EDITOR $aliasFile" 
+done;
+
+# Profiles - Open for editing
+alias bash_profile='$EDITOR ~/.bash_profile'
+alias bash_login='$EDITOR ~/.bash_login'
+alias profile='$EDITOR ~/.profile'
+
+# Paths - Echo out each path in $PATHS
+alias paths='echo ""; echo -e "Paths listed in \$PATH: \n"; echo -e ${PATH//:/\\n}; echo'
+
+# System - Reboot
+if [ -f /sbin/reboot ]; then
+    alias system_reboot='sudo /sbin/reboot'
+elif ( exists reboot ); then
+    alias system_reboot="sudo reboot"
+fi
+
+# System - Power Off
+if [ -f /sbin/poweroff ]; then
+    alias system_power_off='sudo /sbin/poweroff'
+fi
+
+# System - Halt
+if [ -f /sbin/halt ]; then
+    alias system_halt='sudo /sbin/halt'
+fi
+
+# System - Shutdown
+if [ -f /sbin/shutdown ]; then
+    alias system_shut_down='sudo /sbin/shutdown'
+fi

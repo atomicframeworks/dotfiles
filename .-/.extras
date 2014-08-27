@@ -1,0 +1,3 @@
+# .-.extras can be used for settings you don’t want to commit
+
+test "$DOTSILENT" == false && echo -e '*  .- Extra\t\t\t\t*'

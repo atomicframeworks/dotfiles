@@ -1,0 +1,96 @@
+# .-.aliases.apache can be used to add any Apache httpd specific commands
+
+test "$DOTSILENT" == false && echo -e "*\tApache\t\t\t\t*"
+
+# Convenience aliases 
+alias apache_start='echo "Starting Apache" ; apache start'
+alias apache_stop='echo "Stopping Apache" ; apache stop'
+alias apache_restart='echo "Restarting Apache" ; apache restart'
+alias apache_reload='apache -k graceful'
+alias apache_test='apache -t && apache -t -D DUMP_VHOSTS'
+ 
+# Open up files for editing
+# Hosts
+if [ -f /etc/hosts ]; then
+	alias hosts='$EDITOR /etc/hosts'
+elif [ -f /private/etc/hosts ]; then
+	# OSX
+	alias hosts='$EDITOR /private/etc/hosts'
+fi
+ 
+# Vhosts
+if [ -f /etc/apache2/extra/httpd-vhosts.conf ]; then
+    alias vhosts='$EDITOR /etc/apache2/extra/httpd-vhosts.conf'
+elif [ -f /private/etc/apache2/extra/httpd-vhosts.conf ]; then
+	# OSX
+    alias vhosts='$EDITOR /private/etc/apache2/extra/httpd-vhosts.conf'
+fi
+
+# Sites available
+if [ -f /etc/apache2/sites-available ]; then
+	alias sites_available='echo; echo Sites Available:; echo; cd /etc/apache2/sites-available; ls; echo'
+fi
+
+# Sites enabled
+if [ -f /etc/apache2/sites-enabled ]; then
+	alias sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/apache2/sites-enabled; ls; echo'
+fi
+
+# httpd.conf
+if [ -f /etc/apache2/httpd.conf ]; then
+	alias httpd_conf='$EDITOR /etc/apache2/httpd.conf'
+elif [ -f /private/etc/apache2/httpd.conf ]; then
+	# OSX
+	alias httpd_conf='$EDITOR /private/etc/apache2/httpd.conf'
+fi
+
+# apache2.conf
+if [ -f /etc/apache2/apache2.conf ]; then
+    alias apache2_conf='$EDITOR /etc/apache2/apache2.conf'
+elif [ -f /private/etc/apache2/apache2.conf ]; then
+	# TODO - Necessary?
+    alias apache2_conf='$EDITOR /private/etc/apache2/apache2.conf'
+fi
+
+
+# OS specific aliases below
+
+if ( os_is darwin ); then
+	# OSX    
+	alias apache='sudo apachectl'
+	
+	alias apache_mods_enabled='apache -M'
+    
+    # Logs - /private/var/log/apache2/
+    if [ -f /private/var/log/apache2 ]; then
+    	alias apache_logs='echo "Changing directories to Apache logs" ; cd /private/var/log/apache2/'
+    fi
+    
+    # Modules Available - /usr/libexec/apache2
+    if [ -f /usr/libexec/apache2 ]; then
+    	alias apache_mods_available='echo; echo Modules in /usr/libexec/apache2 :; echo; cd /usr/libexec/apache2 ; ls; echo'
+    fi
+    
+    # Edit config alias and list modules alias
+    if [ -f /private/etc/apache2/httpd.conf ]; then
+    	alias apache_config='$EDITOR /private/etc/apache2/httpd.conf'
+    	alias apache_config_mods='cat /private/etc/apache2/httpd.conf | grep -i loadmodule | grep -v #$1'
+    fi
+        
+elif ( os_is linux ); then
+	# Linux    
+	alias apache='sudo /etc/init.d/apache2'
+    
+	alias apache_logs='echo "Changing directories to Apache logs" ; sudo cd /var/log/apache2/'
+	# Note that httpd.conf is historically the main config, but now is used for user specific configuration
+	alias apache_config='open_up /etc/apache2/apache2.conf'
+	alias apache_status='/etc/init.d/apache2 status'
+	alias apache_mods_enabled='echo; echo Modules Enabled:; echo; cd /etc/apache2/mods-enabled; ls; echo'
+	alias apache_mods_available='echo; echo Modules Available:; echo; cd /etc/apache2/mods-available; ls; echo'
+	alias apache_mods_grep='cat /etc/apache2/apache2.conf | grep -i loadmodule'
+    
+    if ( exists a2enmod && exists a2dismod ); then
+    	alias apache_mods_enable='sudo a2enmod'
+    	alias apache_mods_disable='sudo a2dismod'
+    fi
+fi
