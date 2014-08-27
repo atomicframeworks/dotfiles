@@ -1,6 +1,6 @@
 # .-.path can be used to extend $PATH
 
-test "$DOTSILENT" == false && echo -e '*  .- Path\t\t\t\t*'
+test "$DOTSILENT" == false && echo -e '*  .- Paths\t\t\t\t*'
 
 # Path - Add ~/bin
 export PATH="$HOME/bin:$PATH";
