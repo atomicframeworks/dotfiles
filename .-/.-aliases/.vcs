@@ -12,8 +12,9 @@ alias git_untrack_file="git update-index --assume-unchanged"
 # Undo the stop tracking by looking at changes
 alias git_track_file="git update-index --no-assume-unchanged"
 
-
 alias push='git push origin'
+alias pull='git pull'
+alias commit='git commit -m'
 alias gb='git branch'
 
 # Push and pull for gists
