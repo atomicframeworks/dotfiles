@@ -33,15 +33,15 @@ Ex:
 ````
 ## Updating
 There are multiple ways to update:
-1 Set the autoupdate variable in .-.config to true.  This will run a git pull each load on the .- directory.
-2 Run the `.-.update` command.  This will run a git pull on the .- directory.
-3 Manually update using git.
+* Set the autoupdate variable in .-.config to true.  This will run a git pull each load on the .- directory.
+* Run the `.-.update` command.  This will run a git pull on the .- directory.
+* Manually update using git.
 
 
 ## Editing .- dotfiles
 All  .- dotfiles files are aliased for editing by a convention of their directory and name. 
 
-#####Core file (do not delete)
+#####Core files (do not delete)
 .-.aliases<br>
 .-.config<br>
 .-.exports<br>
@@ -52,7 +52,7 @@ All  .- dotfiles files are aliased for editing by a convention of their director
 
 All dotfiles in the .-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
 
-#####Alias modules (safe to delete if desired) 
+#####Alias modules (safe to delete) 
 .-.aliases.apache<br>
 .-.aliases.misc<br>
 .-.aliases.mongodb<br>
