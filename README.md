@@ -43,22 +43,13 @@ All  .- dotfiles files are aliased for editing by a convention of their director
 
 #####Core files (do not delete)
 
-
-.-.aliases<br>
-.-.config<br>
-.-.exports<br>
-.-.extras<br>
-.-.functions<br>
-.-.paths<br>
-.-.profile<br>
-
 <table>
     <tr>
         <th>
-            Filename
+            File
         </th>
         <th>
-            Alias to edit
+            Edit Alias
         </th>
     </tr>
     <tr>
@@ -125,6 +116,74 @@ All dotfiles in the .-aliases directory are automatically aliased for editing.  
 .-.aliases.ruby<br>
 .-.aliases.vcs<br>
 
+
+
+<table>
+    <tr>
+        <th>
+            File
+        </th>
+        <th>
+            Edit Alias
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.apache
+        </th>
+        <th>
+            .-.aliases.apache
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.misc
+        </th>
+        <th>
+            .-.aliases.misc
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.mongodb
+        </th>
+        <th>
+            .-.aliases.mongodb
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.php
+        </th>
+        <th>
+            .-.aliases.php
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.python
+        </th>
+        <th>
+            .-.aliases.python
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.ruby
+        </th>
+        <th>
+            .-.aliases.ruby
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.-aliases/.vcs
+        </th>
+        <th>
+            .-.aliases.vcs
+        </th>
+    </tr>
+</table>
 
 ## Aliases
 There is a slew of added aliases, and they are loaded conditionally.  Some depend on OS, some depend on a language, and others require a command to be installed. 
