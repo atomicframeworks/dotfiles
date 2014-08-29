@@ -1,5 +1,5 @@
 # .- Dotfiles
-Convenient aliases, sensible defaults, and more for your dotfiles.
+Convenient aliases, useful functions, and other goodies for your dotfiles.
 
 * Slew of conveniently organized aliases and functions
 * Extend $PATH with common bin folders automatically
