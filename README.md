@@ -8,7 +8,6 @@ Convenient aliases, sensible defaults, and more for your dotfiles.
 * Customizable and extensible
 * Sensible defaults
 
-
 ## Install
 You can install by cloning the repository and running the bootstrap script.
 
@@ -18,7 +17,7 @@ git clone https://github.com/atomicframeworks/dotfiles.git && . dotfiles/bootstr
 
 ## Config
 To set a config variable you can use the command `.-.config` to open the file for editing.
-Another way is by using the .-.config function.  By passing arguments to .-. config you can set values.  The first argument is the variable name to set and the second is the value.
+Another way is by using the `.-.config` function.  By passing arguments to `.-.config` you can set values.  The first argument is the variable name to set and the second is the value.
 
 Ex:
 ````bash
@@ -33,8 +32,8 @@ Ex:
 ````
 ## Updating
 There are multiple ways to update:
-* Set the autoupdate variable in .-.config to true.  This will run a git pull each load on the .- directory.
-* Run the `.-.update` command.  This will run a git pull on the .- directory.
+* Set the autoupdate variable to true by editing `.-/.config` file.  This setting will run a git pull each load on the .- directory.
+* Execute the `.-.update` command.  This will execute a `git pull` on the .- directory.
 * Manually update using git.
 
 
@@ -106,7 +105,7 @@ All  .- dotfiles files are aliased for editing by a convention of their director
 
 
 ####Alias modules (safe to delete) 
-All dotfiles in the .-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
+All dotfiles in the .-/.-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
 <table>
     <tr>
         <th>
