@@ -16,8 +16,9 @@ git clone https://github.com/atomicframeworks/dotfiles.git && . dotfiles/bootstr
 ````
 
 ## Config
-To set a config variable you can use the command `.-.config` to open the file for editing.
-Another way is by using the `.-.config` function.  By passing arguments to `.-.config` you can set values.  The first argument is the variable name to set and the second is the value.
+There are multiple ways to set a config variable:
+* Use the command `.-.config` to open the file for editing and change the value.
+* Using the `.-.config` function.  By passing arguments to `.-.config` you can set values.  The first argument is the variable name to set and the second is the value.
 
 Ex:
 ````bash
