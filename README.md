@@ -42,6 +42,8 @@ There are multiple ways to update:
 All  .- dotfiles files are aliased for editing by a convention of their directory and name. 
 
 #####Core files (do not delete)
+
+
 .-.aliases<br>
 .-.config<br>
 .-.exports<br>
@@ -49,6 +51,68 @@ All  .- dotfiles files are aliased for editing by a convention of their director
 .-.functions<br>
 .-.paths<br>
 .-.profile<br>
+
+<table>
+    <tr>
+        <th>
+            Filename
+        </th>
+        <th>
+            Alias to edit
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.aliases
+        </th>
+        <th>
+            .-.aliases
+        </th>
+    </tr>
+    <tr>
+        <th>
+            .-/.config
+        </th>
+        <th>
+            .-.config
+        </th>
+    </tr><tr>
+        <th>
+            .-/.exports
+        </th>
+        <th>
+            .-.exports
+        </th>
+    </tr><tr>
+        <th>
+            .-/.extras
+        </th>
+        <th>
+            .-.extras
+        </th>
+    </tr><tr>
+        <th>
+            .-/.functions
+        </th>
+        <th>
+            .-.functions
+        </th>
+    </tr><tr>
+        <th>
+            .-/.paths
+        </th>
+        <th>
+            .-.paths
+        </th>
+    </tr><tr>
+        <th>
+            .-/.profile
+        </th>
+        <th>
+            .-.profile
+        </th>
+    </tr>
+</table>
 
 All dotfiles in the .-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
 
@@ -63,6 +127,6 @@ All dotfiles in the .-aliases directory are automatically aliased for editing.  
 
 
 ## Aliases
-There is a slew of added aliases, and they are loaded conditionally.  Some depend on OS, others on a language or command to be installed. 
+There is a slew of added aliases, and they are loaded conditionally.  Some depend on OS, some depend on a language, and others require a command to be installed. 
 
 Rather than list them all out the best way to see what commands are added is to simply check out the .-.alias files by using the aliases listed in the above `editing .- dotfiles` section.
