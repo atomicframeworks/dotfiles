@@ -1,6 +1,7 @@
-# .-.aliases.vcs can be used to add any version control system commands
+# .-.aliases.vcs
+# Used to add anything version control system (VCS) specific
 
-test "$DOTSILENT" == false && echo -e "*\tVCS\t\t\t\t*"
+test "$SILENT" == false && echo -e "*\tVCS\t\t\t\t*"
 
 # Git 
 alias git_user='git config --global user.name'
@@ -12,10 +13,15 @@ alias git_untrack_file="git update-index --assume-unchanged"
 # Undo the stop tracking by looking at changes
 alias git_track_file="git update-index --no-assume-unchanged"
 
+# Convience
+alias status='git status'
 alias push='git push origin'
 alias pull='git pull'
+# -A flag is for all files (will record file removals)
+alias add='git add -A'
+alias add_all='git add -A * && git add -A */*'
 alias commit='git commit -m'
-alias gb='git branch'
+alias branch='git branch'
 
 # Push and pull for gists
 alias git_gist_pull='git pull gist master'

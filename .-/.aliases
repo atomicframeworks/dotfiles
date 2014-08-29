@@ -1,8 +1,9 @@
-# .-.aliases can be used to add generic aliases
+# .-.aliases
+# Used to add system & generic aliases
 # More specific aliases can be added in the .-aliases folder
-# Any . files in the .-aliases folder are automatically bootstrapped and included
+# Any . files in the .-aliases folder are automatically included and given an alias of .-.aliases.filename
 
-test "$DOTSILENT" == false && echo -e '*  .- Aliases\t\t\t\t*'
+test "$SILENT" == false && echo -e '*  .- Aliases\t\t\t\t*'
 
 # Load all dot files in .-aliases folder
 for aliasFile in $DOTCWD/.-aliases/.*; do

@@ -1,12 +1,31 @@
-# .-.functions can be used to add any custom functions
+# .-.functions
+# Used to add any functions
 
-test "$DOTSILENT" == false && echo -e '*  .- Functions\t\t\t\t*'
+test "$SILENT" == false && echo -e '*  .- Functions\t\t\t\t*'
 
-
-
+# See if the process is aready running
+auto_restart_process() {
+    
+    # Check if the process is already running
+    auto_process_count="$(ps ax | grep 'mythbackend' | grep -v grep | wc -l)"
+    
+    # Run an infinite loop
+    while true;
+    do
+        # If the process is running exit
+        if [ $auto_process_count == 0 ]; then
+            $1;
+        else
+            exit 1
+        fi
+        
+        # Check the exit status of command - code 128 + signal number kills the command
+        test $? -gt 128 && break;
+    done
+}
 
 # Make sure file ends with a newline
-ensureNewLine() {
+ensure_new_line() {
     sed -i '' -e '$a\' $1
 }
 
@@ -22,14 +41,14 @@ exists() {
 
 # .-.config - Function to set config variables or open the file
 # Arguments:
-# Passing no arguments will simply open the config.cfg file
+# Passing no arguments will simply open the .-/.config file
 # 1- The config flag such as DOTSILENT
 # 2- The value to set for the flag
 .-.config() {    
-    # 0 arguments - open the config.cfg file
+    # 0 arguments - open the .-/.config file
     if [ $# -eq 0 ];
     then        
-        $EDITOR $DOTCWD/../config.cfg
+        $EDITOR $DOTCWD/.config
     elif [ $# -eq 1 ];
     then
         # Only one argument - Must have 2 or 0
@@ -38,22 +57,23 @@ exists() {
         # Uppercase the first argument and append equals (=)
         CONFIGVAR=($(echo $1 | awk '{print toupper($0)}'))
         CONFIGVAR=$CONFIGVAR=
-        echo ".- Config setting: $CONFIGVAR$2";
     
-        if grep -Fqi "$CONFIGVAR" $DOTCWD/../config.cfg
+        ensureNewLine $DOTCWD/.config
+    
+        if grep -Fqi "$CONFIGVAR" $DOTCWD/.config
         then
             # The config flag is found in config file
             # Now remove it
-            echo "Now remove it"
-            sed -i "" -e "/$CONFIGVAR/d" $DOTCWD/../config.cfg
+            sed -i "" -e "/$CONFIGVAR/d" $DOTCWD/.config
         else
             # The config flag is NOT found in config file
             # Safe to just add it
-            echo "Config flag not already defined. Adding now."
+            echo -e "\nFlag not found in config file. Adding now..."
         fi
-        ensureNewLine $DOTCWD/../config.cfg 
+        echo -e "\n.-.config setting:  $CONFIGVAR$2\n";
+        
     
-        echo "$CONFIGVAR$2" >> $DOTCWD/../config.cfg
+        echo "$CONFIGVAR$2" >> $DOTCWD/.config
     fi
 }
 

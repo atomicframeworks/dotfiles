@@ -1,6 +1,7 @@
-# .-.aliases.misc can be used to add any miscellaneous commands
+# .-.aliases.misc 
+# Used to add any miscellaneous aliases or commands
 
-test "$DOTSILENT" == false && echo -e "*\tMisc\t\t\t\t*"
+test "$SILENT" == false && echo -e "*\tMisc\t\t\t\t*"
 
 # Symlink, clear, and history - convenience aliases
 alias symlink='ln -s'
@@ -52,13 +53,15 @@ fi
 
 if ( os_is darwin ); then
 	# OSX
+    
     # Remove Where From tag from mp3
     alias remove_where_tag="xattr -d com.apple.metadata:kMDItemWhereFroms ./*.*"
     
-    
 	# Grant or remove admin rights
 	alias admin_on='sudo dseditgroup -o edit -a $USER -t user admin'
+	alias admin_up='sudo dseditgroup -o edit -a $USER -t user admin'
 	alias admin_off='sudo dseditgroup -o edit -d $USER -t user admin'
+	alias admin_down='sudo dseditgroup -o edit -d $USER -t user admin'
     
 	# Desktop Programs
 	alias safari="open -a safari"

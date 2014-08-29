@@ -1,7 +1,8 @@
-# .-.aliases.php can be used to add any PHP specific commands
+# .-.aliases.php
+# Used to add anything PHP specific
 
 if (exists php); then
-    test "$DOTSILENT" == false && echo -e "*\tPHP\t\t\t\t*"
+    test "$SILENT" == false && echo -e "*\tPHP\t\t\t\t*"
 
     # php_config - Open for editing
     if [ -f /etc/php.ini ]; then

@@ -1,6 +1,7 @@
-# .-.aliases.python can be used to add any Ruby specific commands
+# .-.aliases.python 
+# Used to add anything Python specific
 
 if (exists python); then
-    test "$DOTSILENT" == false && echo -e "*\tPython\t\t\t\t*"
+    test "$SILENT" == false && echo -e "*\tPython\t\t\t\t*"
     alias python_serve='python -m SimpleHTTPServer'
 fi

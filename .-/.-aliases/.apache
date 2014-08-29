@@ -1,6 +1,7 @@
-# .-.aliases.apache can be used to add any Apache httpd specific commands
+# .-.aliases.apache
+# Used to add anything Apache httpd specific
 
-test "$DOTSILENT" == false && echo -e "*\tApache\t\t\t\t*"
+test "$SILENT" == false && echo -e "*\tApache\t\t\t\t*"
 
 # Convenience aliases 
 alias apache_start='echo "Starting Apache" ; apache start'

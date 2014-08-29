@@ -1,3 +1,4 @@
-# .-.extras can be used for settings you don’t want to commit
+# .-.extras
+# Used for anything extra you don’t want to commit
 
-test "$DOTSILENT" == false && echo -e '*  .- Extras\t\t\t\t*'
+test "$SILENT" == false && echo -e '*  .- Extras\t\t\t\t*'

@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# .-.bootstrap
+# Used to `install` and toggle on/off .- dotfiles
+
 #git pull origin master;
 
 # Search flag to determine if we have installed
@@ -13,20 +16,16 @@ DOTBASHPROFILEPATH=~/.bash_profile
 DOTBASHLOGINPATH=~/.bash_login
 DOTPROFILEPATH=~/.profile
 
-# Make sure file ends with a newline
-ensureNewLine() {
-    sed -i '' -e '$a\' $1
-}
-
 # Add the .- source files
-addDotSource() {
+add_dot_source() {
     echo "Adding $DOTFLAG in to $1"
-    ensureNewLine $1
+    # Make sure file ends with a newline
+    sed -i '' -e '$a\' $1
     echo -e "$DOTFLAG\nsource $DOTCWD/.-/.profile" >> $1
 }
 
 # Remove the .- source files
-removeDotSource() {
+remove_dot_source() {
     echo "Removing $DOTFLAG from $1"
     awk '/#.-/{getline;next} 1' $1 > $1.tmp && mv $1.tmp $1
 }
@@ -38,28 +37,28 @@ if [ -f $DOTBASHPROFILEPATH ]
 then
     if grep -Fxq "$DOTFLAG" $DOTBASHPROFILEPATH
     then
-        removeDotSource $DOTBASHPROFILEPATH
+        remove_dot_source $DOTBASHPROFILEPATH
     else
-        addDotSource $DOTBASHPROFILEPATH
+        add_dot_source $DOTBASHPROFILEPATH
     fi
 elif [ -f $DOTBASHLOGINPATH ]
 then    
     if grep -Fxq "$DOTFLAG" $DOTBASHLOGINPATH
     then
-        removeDotSource $DOTBASHLOGINPATH
+        remove_dot_source $DOTBASHLOGINPATH
     else
-        addDotSource $DOTBASHLOGINPATH
+        add_dot_source $DOTBASHLOGINPATH
     fi
 elif [ -f $DOTPROFILEPATH ]
 then    
     if grep -Fxq "$DOTFLAG" $DOTPROFILEPATH
     then
-        removeDotSource $DOTPROFILEPATH
+        remove_dot_source $DOTPROFILEPATH
     else
-        addDotSource $DOTPROFILEPATH
+        add_dot_source $DOTPROFILEPATH
     fi
 else
     echo "Warning: Could not find files $DOTBASHPROFILEPATH, $DOTBASHLOGINPATH, $DOTPROFILEPATH"
     echo "Warning: Creating $DOTPROFILEPATH"
-    echo "" >> $DOTBASHPROFILEPATH && addDotSource $DOTBASHPROFILEPATH
+    echo "" >> $DOTBASHPROFILEPATH && add_dot_source $DOTBASHPROFILEPATH
 fi

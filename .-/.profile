@@ -1,17 +1,28 @@
+# .-.profile
+# Used to init .- dotfiles 
+
 # OS and CWD
 OS=`uname`
 DOTCWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# If ~.bashrc exists execute it
-if [ -f "$DOTCWD/../config.cfg" ]; then
-    . "$DOTCWD/../config.cfg"
+# If ~.bashrc exists include it
+if [ -f $DOTCWD/.config ]; then
+    . $DOTCWD/.config
 fi
 
-test "$DOTSILENT" == false && echo -e '\n*****************************************\n*\t      .- Dotfiles\t\t*\n*****************************************\n*\t\t\t\t\t*';
+# If auto update config is true then update each load
+test "$AUTOUPDATE" == true && (cd $DOTCWD/../; git pull origin master)
+
+# Ask for the administrator password upfront
+test "$SUDOALWAYS" == true && sudo -v
+# Update existing `sudo` time stamp until `.osx` has finished
+test "$SUDOALWAYS" == true && while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+test "$SILENT" == false && echo -e '\n*****************************************\n*\t      .- Dotfiles\t\t*\n*****************************************\n*\t\t\t\t\t*';
 
 # If ~.bashrc exists source it in
 if [ -f ~/.bashrc ]; then
-    test "$DOTSILENT" == false && echo -e "*  .- Sourced in ~/.bashrc file\t\t*"
+    test "$SILENT" == false && echo -e "*  .- Sourced in ~/.bashrc file\t\t*"
     . ~/.bashrc
 fi
 
@@ -24,4 +35,4 @@ done;
 alias .-.profile="$EDITOR $DOTCWD/.profile";
 alias .-.bootstrap="$EDITOR $DOTCWD/../bootstrap.sh";
 
-test "$DOTSILENT" == false && echo -e '*\t\t\t\t\t*\n*****************************************\n';
+test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*****************************************\n';

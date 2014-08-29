@@ -1,6 +1,7 @@
-# .-.aliases.mongodb can be used to add any MongoDB specific commands
+# .-.aliases.mongodb 
+# Used to add anything MongoDB specific
 
-test "$DOTSILENT" == false && echo -e "*\tMongoDB\t\t\t\t*"
+test "$SILENT" == false && echo -e "*\tMongoDB\t\t\t\t*"
 
 # Mongo Shell - Set verbose
 alias mongos='mongo --verbose'

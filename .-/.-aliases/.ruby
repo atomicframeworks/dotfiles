@@ -1,7 +1,8 @@
-# .-.aliases.ruby can be used to add any Ruby specific commands
+# .-.aliases.ruby
+# Used to add anything Ruby specific
 
 if (exists ruby); then
-    test "$DOTSILENT" == false && echo -e "*\tRuby\t\t\t\t*"
+    test "$SILENT" == false && echo -e "*\tRuby\t\t\t\t*"
 
     alias rehash='rbenv rehash'
     alias bi='bundle install; rbenv rehash'

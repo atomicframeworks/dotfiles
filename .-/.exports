@@ -1,6 +1,7 @@
-# .-.exports can be used for adding any export calls
+# .-.exports 
+# Used for adding any exports
 
-test "$DOTSILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
+test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 
 # EDITOR - Export default editor based on what is available for the OS
 if ( os_is darwin ); then
