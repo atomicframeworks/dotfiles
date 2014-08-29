@@ -41,26 +41,25 @@ There are multiple ways to update:
 ## Editing .- dotfiles
 All  .- dotfiles files are aliased for editing by a convention of their directory and name. 
 
-######Core file (do not delete)
-.-.aliases
-.-.config
-.-.exports
-.-.extras
-.-.functions
-.-.paths
-.-.profile
+#####Core file (do not delete)
+.-.aliases<br>
+.-.config<br>
+.-.exports<br>
+.-.extras<br>
+.-.functions<br>
+.-.paths<br>
+.-.profile<br>
 
 All dotfiles in the .-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
 
-######Alias modules (safe to delete if desired) 
-.-.aliases.apache
-
-.-.aliases.misc
-.-.aliases.mongodb
-.-.aliases.php
-.-.aliases.python
-.-.aliases.ruby
-.-.aliases.vcs
+#####Alias modules (safe to delete if desired) 
+.-.aliases.apache<br>
+.-.aliases.misc<br>
+.-.aliases.mongodb<br>
+.-.aliases.php<br>
+.-.aliases.python<br>
+.-.aliases.ruby<br>
+.-.aliases.vcs<br>
 
 
 ## Aliases
