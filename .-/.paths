@@ -4,10 +4,16 @@
 test "$SILENT" == false && echo -e '*  .- Paths\t\t\t\t*'
 
 # Path - Add ~/bin
-export PATH="$HOME/bin:$PATH";
+if [ -d $HOME/bin ]; then
+    export PATH="$HOME/bin:$PATH";
+fi
 
-# Path - Add rbenv (bin & shims)
-export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+# Add rbenv (bin & shims)
+if [ -d $HOME/.rbenv/bin ]; then
+    export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+fi
 
-# Path - Add MongoDB
-export PATH="$HOME/bin/mongodb/bin:$PATH"
+# Add MongoDB
+if [ -d $HOME/.rbenv/bin ]; then
+    export PATH="$HOME/bin/mongodb/bin:$PATH"
+fi

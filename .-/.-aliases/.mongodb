@@ -7,7 +7,6 @@ test "$SILENT" == false && echo -e "*\tMongoDB\t\t\t\t*"
 alias mongos='mongo --verbose'
 alias mongod_shell='mongos'
 
-
 # OS specific aliases below
 
 if ( os_is darwin ); then

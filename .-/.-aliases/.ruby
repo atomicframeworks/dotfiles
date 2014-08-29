@@ -3,10 +3,12 @@
 
 if (exists ruby); then
     test "$SILENT" == false && echo -e "*\tRuby\t\t\t\t*"
-
+    
+    # rbenv 
     alias rehash='rbenv rehash'
     alias bi='bundle install; rbenv rehash'
 
+    # rake
     alias ri='rake install'
     alias rd='rake deploy'
     alias bi='bundle install'

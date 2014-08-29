@@ -48,7 +48,6 @@ if (exists curl); then
     alias url_headers='curl -I -L'
 fi
 
-
 # OS specific aliases below
 
 if ( os_is darwin ); then
@@ -60,7 +59,8 @@ if ( os_is darwin ); then
 	# Grant or remove admin rights
 	alias admin_on='sudo dseditgroup -o edit -a $USER -t user admin'
 	alias admin_up='sudo dseditgroup -o edit -a $USER -t user admin'
-	alias admin_off='sudo dseditgroup -o edit -d $USER -t user admin'
+	# Same as on off
+    alias admin_off='sudo dseditgroup -o edit -d $USER -t user admin'
 	alias admin_down='sudo dseditgroup -o edit -d $USER -t user admin'
     
 	# Desktop Programs
@@ -72,7 +72,7 @@ if ( os_is darwin ); then
 	alias textmate='open -a TextMate'
 	alias f='open -a Finder '
 	alias fh='open -a Finder .'
-
+        
 	# Recursively delete `.DS_Store` files
 	alias delete_ds_store="find . -type f -name '*.DS_Store' -ls -delete"
 
@@ -87,6 +87,46 @@ if ( os_is darwin ); then
 	# Hide/show all desktop icons (useful when presenting)
 	alias hide_desktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 	alias show_desktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+    
+    # Auto symlink Sublime Text
+    # IF Sublime Text is installed on the machine add symlink according to Sublime's docs
+    if [ -f /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ]; then
+        if [ -d $HOME/bin ]; then
+            if [ ! -f $HOME/bin/subl ]; then
+                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to ~/bin/subl \t*'
+                ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" $HOME/bin/subl
+            fi
+        elif [ -d /usr/local/bin ]; then        
+            if [ ! -f /usr/local/bin/subl ]; then   
+                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to /usr/local/bin \t*'
+                ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+            fi
+        fi
+    fi
+    
+    # Auto symlink TexMate
+    # IF TextMate is installed on the machine add symlink according to Sublime's docs
+    if [ -f /Applications/TextMate.app/Contents/Resources/mate ]; then
+        # Check if home bin directory exists. If not try /usr/local
+        if [ -d $HOME/bin ]; then
+            if [ ! -f $HOME/bin/mate ]; then
+                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to ~/bin/mate \t*'
+                ln -s /Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
+            fi
+        elif [ -d /usr/local/bin ]; then        
+            if [ ! -f /usr/local/bin/mate ]; then   
+                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to /usr/local/bin \t*'
+                ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
+            fi
+        fi
+    fi
+    
+    # If sublime is added to bin as subl then alias as sublime
+    if (exists subl); then
+        alias sublime='subl'
+    elif (exists sublime); then
+        alias subl='sublime'
+    fi
 	
 elif ( os_is linux ); then
 	# Linux   

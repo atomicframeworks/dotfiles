@@ -3,7 +3,8 @@
 
 test "$SILENT" == false && echo -e '*  .- Functions\t\t\t\t*'
 
-# See if the process is aready running
+# Run a process and automatically restart it if it errors
+# Killing the process with sigterm will not restart
 auto_restart_process() {
     
     # Check if the process is already running
@@ -29,7 +30,7 @@ ensure_new_line() {
     sed -i '' -e '$a\' $1
 }
 
-# Exists - Function for testing if command exists
+# Test if command exists
 exists() {
 	if command -v $1 &>/dev/null
 	then
@@ -58,7 +59,7 @@ exists() {
         CONFIGVAR=($(echo $1 | awk '{print toupper($0)}'))
         CONFIGVAR=$CONFIGVAR=
     
-        ensureNewLine $DOTCWD/.config
+        ensure_new_line $DOTCWD/.config
     
         if grep -Fqi "$CONFIGVAR" $DOTCWD/.config
         then
@@ -74,16 +75,14 @@ exists() {
         
     
         echo "$CONFIGVAR$2" >> $DOTCWD/.config
+        
+        # Resource profile to use new settings
+        clear && . $DOTCWD/.profile
     fi
 }
 
-####
-## os_is - Function for case insensitive testing if the os is linux, darwin, etc.
-# 	 	Example:
-#			if ( os_is linux ); then
-#			else
-#			fi
 
+# Case insensitive testing if the os is linux, darwin, etc.
 os_is() {
 	# Convert test and os to lower
 	local this=$( echo $1 | tr '[A-Z]' '[a-z]' )
@@ -96,30 +95,21 @@ os_is() {
 }
 
 
-####
-## Open Up - Function for opening with default editor for systems that do not support open
-# 	 	Example:
-#			open_up filename
-
+# Open with default editor for systems that do not support open
 open_up() {
 	$EDITOR $1
 }
-
 openup() {
 	$EDITOR $1
 }
-
-
 
 # Process helpers - find & stop processes
 get_process_by_name() {
     ps aux | pgrep -f $1
 }
-
 kill_process_by_name() {
     pkill $1
 }
-
 kill_process_by_id() {
     kill --term $1
 }
