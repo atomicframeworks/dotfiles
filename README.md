@@ -1,12 +1,12 @@
 # .- Dotfiles
 Convenient aliases, sensible defaults, and more for your dotfiles.
 
-*) Slew of conveniently organized aliases and functions
-*) Extend $PATH with common bin folders automatically
-*) Auto symlink Sublime Text and TextMate editors for shell commands
-*) Auto load and alias any files added to .-aliases folder
-*) Customizable and extensible
-*) Sensible defaults
+* Slew of conveniently organized aliases and functions
+* Extend $PATH with common bin folders automatically
+* Auto symlink Sublime Text and TextMate editors for shell commands
+* Auto load and alias any files added to .-aliases folder
+* Customizable and extensible
+* Sensible defaults
 
 
 ## Install
