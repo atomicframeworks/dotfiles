@@ -33,9 +33,9 @@ Ex:
 ````
 ## Updating
 There are multiple ways to update:
-1) Set the autoupdate variable in .-.config to true.  This will run a git pull each load on the .- directory.
-2) Run the `.-.update` command.  This will run a git pull on the .- directory.
-3) Manually update using git.
+1 Set the autoupdate variable in .-.config to true.  This will run a git pull each load on the .- directory.
+2 Run the `.-.update` command.  This will run a git pull on the .- directory.
+3 Manually update using git.
 
 
 ## Editing .- dotfiles
@@ -54,6 +54,7 @@ All dotfiles in the .-aliases directory are automatically aliased for editing.  
 
 ######Alias modules (safe to delete if desired) 
 .-.aliases.apache
+
 .-.aliases.misc
 .-.aliases.mongodb
 .-.aliases.php
