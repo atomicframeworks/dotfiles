@@ -42,7 +42,6 @@ There are multiple ways to update:
 All  .- dotfiles files are aliased for editing by a convention of their directory and name. 
 
 #####Core files (do not delete)
-
 <table>
     <tr>
         <th>
@@ -108,16 +107,6 @@ All  .- dotfiles files are aliased for editing by a convention of their director
 All dotfiles in the .-aliases directory are automatically aliased for editing.  If a new dotfile is added to the .-aliases directory it will automatically be loaded and aliased similarly to the following already included files.
 
 #####Alias modules (safe to delete) 
-.-.aliases.apache<br>
-.-.aliases.misc<br>
-.-.aliases.mongodb<br>
-.-.aliases.php<br>
-.-.aliases.python<br>
-.-.aliases.ruby<br>
-.-.aliases.vcs<br>
-
-
-
 <table>
     <tr>
         <th>
