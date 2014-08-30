@@ -6,7 +6,7 @@ Convenient aliases, useful functions, and other goodies for your dotfiles.
 * Auto symlink Sublime Text and TextMate editors for shell commands
 * Auto load and alias any files added to .-aliases folder
 * Customizable and extensible
-* Sensible defaults
+
 
 ## Install
 You can install by cloning the repository and running the bootstrap script.
@@ -25,11 +25,11 @@ Ex:
 .-.config silent false
 ````
 
-Setting the editor config variable will overrides .- dotfiles editor export preference.  For example if you had the Sublime 
+Setting the editor config variable will override .- dotfiles editor export defaults.  For example if you wanted Sublime as the editor and the Sublime command is `subl`
 
 Ex:
 ````bash
-.-.config editor vim
+.-.config editor subl
 ````
 ## Updating
 There are multiple ways to update:
