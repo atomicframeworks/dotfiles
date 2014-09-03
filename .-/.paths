@@ -3,17 +3,24 @@
 
 test "$SILENT" == false && echo -e '*  .- Paths\t\t\t\t*'
 
-# Path - Add ~/bin
-if [ -d $HOME/bin ]; then
-    export PATH="$HOME/bin:$PATH";
+# Path - Add ~/bin if not already in $PATH
+# TODO -- Is [[ ]] a portibility issue?
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    if [ -d "$HOME"/bin ]; then
+        export PATH="$HOME/bin:$PATH";
+    fi
 fi
 
 # Add rbenv (bin & shims)
-if [ -d $HOME/.rbenv/bin ]; then
-    export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+if [[ ":$PATH:" != *":$HOME/.rbenv/bin:"* ]]; then
+    if [ -d "$HOME"/.rbenv/bin ]; then
+        export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+    fi
 fi
 
 # Add MongoDB
-if [ -d $HOME/.rbenv/bin ]; then
-    export PATH="$HOME/bin/mongodb/bin:$PATH"
+if [[ ":$PATH:" != *":$HOME/bin/mongodb/bin:"* ]]; then
+    if [ -d "$HOME"/bin/mongodb/bin ]; then
+        export PATH="$HOME/bin/mongodb/bin:$PATH"
+    fi
 fi

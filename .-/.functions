@@ -114,6 +114,7 @@ kill_process_by_id() {
     kill --term $1
 }
 
+# OS specific functions below
 
 if ( os_is darwin ); then
     # OSX
@@ -304,4 +305,8 @@ EOF
     new_win() {
         new_tab "$@" # Simply pass through to 'newtab', which will examine the call stack to see how it was invoked.
     }
+    
+    # Convenience aliases
+    alias newTab="new_tab"
+    alias newWin="new_win"
 fi
