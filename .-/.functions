@@ -32,12 +32,12 @@ ensure_new_line() {
 
 # Test if command exists
 exists() {
-	if command -v $1 &>/dev/null
-	then
-		return 0
-	else
-	    return 1
-	fi
+    if command -v $1 &>/dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # .-.config - Function to set config variables or open the file
@@ -84,23 +84,23 @@ exists() {
 
 # Case insensitive testing if the os is linux, darwin, etc.
 os_is() {
-	# Convert test and os to lower
-	local this=$( echo $1 | tr '[A-Z]' '[a-z]' )
-	local os=$( echo $OS | tr '[A-Z]' '[a-z]' )
-	if [ $os == $this ]; then
-		return 0
-	else
-		return 1
-	fi
+    # Convert test and os to lower
+    local this=$( echo $1 | tr '[A-Z]' '[a-z]' )
+    local os=$( echo $OS | tr '[A-Z]' '[a-z]' )
+    if [ $os == $this ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 
 # Open with default editor for systems that do not support open
 open_up() {
-	$EDITOR $1
+    $EDITOR $1
 }
 openup() {
-	$EDITOR $1
+    $EDITOR $1
 }
 
 # Process helpers - find & stop processes
@@ -116,7 +116,7 @@ kill_process_by_id() {
 
 
 if ( os_is darwin ); then
-	# OSX
+    # OSX
     
     # List the members of a group
     members_of_group () { dscl . -list /Users | while read user; do printf "$user "; dsmemberutil checkmembership -U "$user" -G "$*"; done | grep "is a member" | cut -d " " -f 1; };

@@ -31,7 +31,7 @@ fi
 
 # Load the shell dotfiles and create edit aliases for them
 for file in .{paths,functions,exports,aliases,extras}; do
-	[ -r "$DOTCWD/$file" ] && [ -f "$DOTCWD/$file" ] && . "$DOTCWD/$file" && alias .-$file="\$EDITOR \"$DOTCWD/$file\"";
+    [ -r "$DOTCWD/$file" ] && [ -f "$DOTCWD/$file" ] && . "$DOTCWD/$file" && alias .-$file="\$EDITOR \"$DOTCWD/$file\"";
 done;
 
 # Manually add profile, bootstrap, and config aliases as part of core profile

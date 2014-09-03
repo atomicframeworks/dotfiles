@@ -7,37 +7,37 @@ test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 # If already defined then skip
 if [ -z "$EDITOR" ]; then
     if ( os_is darwin ); then
-    	# OSX
-    	if ( exists mate ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tTextMate\t\t*'
-    		export EDITOR="mate"
+        # OSX
+        if ( exists mate ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tTextMate\t\t*'
+            export EDITOR="mate"
         elif ( exists subl ); then
-        	test "$DOTSILENT" == false && echo -e '*\tEDITOR:\Sublime Text\t\t*'
-        	export EDITOR="subl -w"
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR:\Sublime Text\t\t*'
+            export EDITOR="subl -w"
         elif ( exists sublime ); then
-        	test "$DOTSILENT" == false && echo -e '*\tEDITOR:\Sublime Text\t\t*'
-        	export EDITOR="sublime -w"        
-    	elif ( exists nano ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tNano\t\t*'        
-    		export EDITOR="/usr/bin/nano"
-    	elif ( exists vim ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
-    		export EDITOR="/usr/bin/vim"
-    	elif ( exists vi ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
-    		export EDITOR="/usr/bin/vi" 
-    	fi
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR:\Sublime Text\t\t*'
+            export EDITOR="sublime -w"        
+        elif ( exists nano ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR:\tNano\t\t*'        
+            export EDITOR="/usr/bin/nano"
+        elif ( exists vim ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
+            export EDITOR="/usr/bin/vim"
+        elif ( exists vi ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
+            export EDITOR="/usr/bin/vi" 
+        fi
     elif ( os_is linux ); then
-    	# Linux	
-    	if ( exists nano ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tNano\t\t*'        
-    		export EDITOR="/usr/bin/nano"
-    	elif ( exists vim ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
-    		export EDITOR="/usr/bin/vim"
-    	elif ( exists vi ); then
-    		test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
-    		export EDITOR="/usr/bin/vi"
-    	fi
+        # Linux 
+        if ( exists nano ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR\tNano\t\t*'        
+            export EDITOR="/usr/bin/nano"
+        elif ( exists vim ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvim\t\t*'        
+            export EDITOR="/usr/bin/vim"
+        elif ( exists vi ); then
+            test "$DOTSILENT" == false && echo -e '*\tEDITOR\tvi\t\t*'        
+            export EDITOR="/usr/bin/vi"
+        fi
     fi
 fi

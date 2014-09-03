@@ -51,42 +51,42 @@ fi
 # OS specific aliases below
 
 if ( os_is darwin ); then
-	# OSX
+    # OSX
     
     # Remove Where From tag from mp3
     alias remove_where_tag="xattr -d com.apple.metadata:kMDItemWhereFroms ./*.*"
     
-	# Grant or remove admin rights
-	alias admin_on='sudo dseditgroup -o edit -a $USER -t user admin'
-	alias admin_up='sudo dseditgroup -o edit -a $USER -t user admin'
-	# Same as on off
+    # Grant or remove admin rights
+    alias admin_on='sudo dseditgroup -o edit -a $USER -t user admin'
+    alias admin_up='sudo dseditgroup -o edit -a $USER -t user admin'
+    # Same as on off
     alias admin_off='sudo dseditgroup -o edit -d $USER -t user admin'
-	alias admin_down='sudo dseditgroup -o edit -d $USER -t user admin'
+    alias admin_down='sudo dseditgroup -o edit -d $USER -t user admin'
     
-	# Desktop Programs
-	alias safari="open -a safari"
-	alias firefox="open -a firefox"
-	alias chrome="open -a google\ chrome"
-	alias insecure_chrome="open -a Google\ Chrome --args --disable-web-security"
-	alias canary="open -a google\ chrome\ canary"
-	alias textmate='open -a TextMate'
-	alias f='open -a Finder '
-	alias fh='open -a Finder .'
+    # Desktop Programs
+    alias safari="open -a safari"
+    alias firefox="open -a firefox"
+    alias chrome="open -a google\ chrome"
+    alias insecure_chrome="open -a Google\ Chrome --args --disable-web-security"
+    alias canary="open -a google\ chrome\ canary"
+    alias textmate='open -a TextMate'
+    alias f='open -a Finder '
+    alias fh='open -a Finder .'
         
-	# Recursively delete `.DS_Store` files
-	alias delete_ds_store="find . -type f -name '*.DS_Store' -ls -delete"
+    # Recursively delete `.DS_Store` files
+    alias delete_ds_store="find . -type f -name '*.DS_Store' -ls -delete"
 
-	# Empty the Trash on all mounted volumes and the main HDD
-	# Also, clear Apple’s System Logs to improve shell startup speed
-	alias empty_trash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+    # Empty the Trash on all mounted volumes and the main HDD
+    # Also, clear Apple’s System Logs to improve shell startup speed
+    alias empty_trash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
-	# Show/hide hidden files in Finder
-	alias show_hidden_files="defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder"
-	alias hide_hidden_files="defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder"
+    # Show/hide hidden files in Finder
+    alias show_hidden_files="defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder"
+    alias hide_hidden_files="defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder"
 
-	# Hide/show all desktop icons (useful when presenting)
-	alias hide_desktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-	alias show_desktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+    # Hide/show all desktop icons (useful when presenting)
+    alias hide_desktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+    alias show_desktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
         
     # If sublime is not symlinked - do so if possible
     if (! exists subl); then
@@ -144,6 +144,6 @@ if ( os_is darwin ); then
     fi
       
 elif ( os_is linux ); then
-	# Linux   
-	alias system_version="lsb_release -a"
+    # Linux   
+    alias system_version="lsb_release -a"
 fi
