@@ -87,47 +87,62 @@ if ( os_is darwin ); then
 	# Hide/show all desktop icons (useful when presenting)
 	alias hide_desktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 	alias show_desktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-    
-    # Auto symlink Sublime Text
-    # IF Sublime Text is installed on the machine add symlink according to Sublime's docs
-    if [ -f /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ]; then
-        if [ -d $HOME/bin ]; then
-            if [ ! -f $HOME/bin/subl ]; then
-                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to ~/bin/subl \t*'
-                ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" $HOME/bin/subl
-            fi
-        elif [ -d /usr/local/bin ]; then        
-            if [ ! -f /usr/local/bin/subl ]; then   
-                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to /usr/local/bin \t*'
-                ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-            fi
-        fi
-    fi
-    
-    # Auto symlink TexMate
-    # IF TextMate is installed on the machine add symlink according to Sublime's docs
-    if [ -f /Applications/TextMate.app/Contents/Resources/mate ]; then
-        # Check if home bin directory exists. If not try /usr/local
-        if [ -d $HOME/bin ]; then
-            if [ ! -f $HOME/bin/mate ]; then
-                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to ~/bin/mate \t*'
-                ln -s /Applications/TextMate.app/Contents/Resources/mate ~/bin/mate
-            fi
-        elif [ -d /usr/local/bin ]; then        
-            if [ ! -f /usr/local/bin/mate ]; then   
-                test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to /usr/local/bin \t*'
-                ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
+        
+    # If sublime is not symlinked - do so if possible
+    if (! exists subl); then
+        # Find the first Sublime Text*.app file in either /Applications or ~/Applications
+        sublimePath=`find /Applications ~/Applications -d -maxdepth 1 -iname "Sublime Text*.app" | head -1`
+        # If we found a file
+        if [ -a "$sublimePath/Contents/SharedSupport/bin/subl" ]; then
+            # Add full path to $sublimePath var
+            sublimePath="$sublimePath/Contents/SharedSupport/bin/subl"
+            # Check if home bin directory exists. If not try /usr/local
+            if [ -d "$HOME/bin" ]; then                
+                # Make sure there is not already a symbolic link
+                if [ ! -L "$HOME/bin/subl" ]; then
+                    test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to ~/bin/subl \t*'
+                    ln -s "$sublimePath" "$HOME/bin/subl"
+                fi
+            elif [ -d "/usr/local/bin" ]; then
+                # Make sure there is not already a symbolic link  
+                if [ ! -L "/usr/local/bin/subl" ]; then   
+                    test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink Sublime to /usr/local/bin \t*'
+                    ln -s "$sublimePath" /usr/local/bin/subl
+                fi
             fi
         fi
     fi
-    
+        
     # If sublime is added to bin as subl then alias as sublime
     if (exists subl); then
         alias sublime='subl'
     elif (exists sublime); then
         alias subl='sublime'
     fi
-	
+    
+    # If TextMate is not symlinked - do so if possible
+    if (! exists mate); then
+        # Find the first mate file in TextMate.app located in /Applications or ~/Applications
+        textMatePath=`find /Applications/TextMate.app/Contents/Resources ~/Applications/TextMate.app/Contents/Resources -d -maxdepth 1 -iname "mate" 2>/dev/null | head -1`
+        # If we found a file
+        if [ -a "$textMatePath" ]; then
+            # Check if home bin directory exists. If not try /usr/local
+            if [ -d "$HOME/bin" ]; then
+                # Make sure there is not already a symbolic link
+                if [ ! -L "$HOME/bin/mate" ]; then
+                    test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to ~/bin/mate \t*'
+                    ln -s "$textMatePath" "$HOME/bin/mate"
+                fi
+            elif [ -d "/usr/local/bin" ]; then                
+                # Make sure there is not already a symbolic link
+                if [ ! -L "/usr/local/bin/mate" ]; then   
+                    test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Symlink TextMate to /usr/local/bin \t*'
+                    ln -s "$textMatePath" /usr/local/bin/mate
+                fi
+            fi
+        fi
+    fi
+      
 elif ( os_is linux ); then
 	# Linux   
 	alias system_version="lsb_release -a"

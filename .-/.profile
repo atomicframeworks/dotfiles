@@ -6,12 +6,12 @@ OS=`uname`
 DOTCWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # If ~.bashrc exists include it
-if [ -f $DOTCWD/.config ]; then
-    . $DOTCWD/.config
+if [ -f "$DOTCWD/.config" ]; then
+    . "$DOTCWD/.config"
 fi
 
 # If auto update config is true then update each load
-test "$AUTOUPDATE" == true && (cd $DOTCWD/../; git pull origin master)
+test "$AUTOUPDATE" == true && (cd "$DOTCWD/../"; git pull origin master)
 
 # Check if we should always sudo
 if [ "$SUDOALWAYS" == true ]; then
@@ -31,11 +31,11 @@ fi
 
 # Load the shell dotfiles and create edit aliases for them
 for file in .{paths,functions,exports,aliases,extras}; do
-	[ -r "$DOTCWD/$file" ] && [ -f "$DOTCWD/$file" ] && . "$DOTCWD/$file" && alias .-$file="\$EDITOR $DOTCWD/$file";
+	[ -r "$DOTCWD/$file" ] && [ -f "$DOTCWD/$file" ] && . "$DOTCWD/$file" && alias .-$file="\$EDITOR \"$DOTCWD/$file\"";
 done;
 
 # Manually add profile, bootstrap, and config aliases as part of core profile
-alias .-.profile="$EDITOR $DOTCWD/.profile";
-alias .-.bootstrap="$EDITOR $DOTCWD/../bootstrap.sh";
+alias .-.profile="$EDITOR \"$DOTCWD/.profile\"";
+alias .-.bootstrap="$EDITOR \"$DOTCWD/../bootstrap.sh\"";
 
 test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*****************************************\n';
