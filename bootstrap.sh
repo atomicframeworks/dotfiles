@@ -21,13 +21,13 @@ add_dot_source() {
     echo "Adding $DOTFLAG in to $1"
     # Make sure file ends with a newline
     sed -i '' -e '$a\' $1
-    echo -e "$DOTFLAG\nsource $DOTCWD/.-/.profile" >> $1
+    echo -e "$DOTFLAG\nsource \"$DOTCWD/.-/.profile\"" >> "$1"
 }
 
 # Remove the .- source files
 remove_dot_source() {
     echo "Removing $DOTFLAG from $1"
-    awk '/#.-/{getline;next} 1' $1 > $1.tmp && mv $1.tmp $1
+    awk '/#.-/{getline;next} 1' "$1" > "$1.tmp" && mv "$1.tmp" "$1"
 }
 
 # Check where we should add #.-
