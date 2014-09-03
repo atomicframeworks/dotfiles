@@ -33,32 +33,32 @@ remove_dot_source() {
 # Check where we should add #.-
 # When Bash is invoked as n interactive shell it loads the first script in order of
 # ~/.bash_profile, ~/.bash_login, and ~/.profile, in that order
-if [ -f $DOTBASHPROFILEPATH ]
+if [ -f "$DOTBASHPROFILEPATH" ]
 then
-    if grep -Fxq "$DOTFLAG" $DOTBASHPROFILEPATH
+    if grep -Fxq "$DOTFLAG" "$DOTBASHPROFILEPATH"
     then
-        remove_dot_source $DOTBASHPROFILEPATH
+        remove_dot_source "$DOTBASHPROFILEPATH"
     else
-        add_dot_source $DOTBASHPROFILEPATH
+        add_dot_source "$DOTBASHPROFILEPATH"
     fi
-elif [ -f $DOTBASHLOGINPATH ]
+elif [ -f "$DOTBASHLOGINPATH" ]
 then    
-    if grep -Fxq "$DOTFLAG" $DOTBASHLOGINPATH
+    if grep -Fxq "$DOTFLAG" "$DOTBASHLOGINPATH"
     then
-        remove_dot_source $DOTBASHLOGINPATH
+        remove_dot_source "$DOTBASHLOGINPATH"
     else
-        add_dot_source $DOTBASHLOGINPATH
+        add_dot_source "$DOTBASHLOGINPATH"
     fi
-elif [ -f $DOTPROFILEPATH ]
+elif [ -f "$DOTPROFILEPATH" ]
 then    
-    if grep -Fxq "$DOTFLAG" $DOTPROFILEPATH
+    if grep -Fxq "$DOTFLAG" "$DOTPROFILEPATH"
     then
-        remove_dot_source $DOTPROFILEPATH
+        remove_dot_source "$DOTPROFILEPATH"
     else
-        add_dot_source $DOTPROFILEPATH
+        add_dot_source "$DOTPROFILEPATH"
     fi
 else
     echo "Warning: Could not find files $DOTBASHPROFILEPATH, $DOTBASHLOGINPATH, $DOTPROFILEPATH"
     echo "Warning: Creating $DOTPROFILEPATH"
-    echo "" >> $DOTBASHPROFILEPATH && add_dot_source $DOTBASHPROFILEPATH
+    echo "" >> "$DOTBASHPROFILEPATH" && add_dot_source "$DOTBASHPROFILEPATH"
 fi
