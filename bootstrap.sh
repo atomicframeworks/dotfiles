@@ -58,7 +58,7 @@ then
         add_dot_source "$DOTPROFILEPATH"
     fi
 else
-    echo "Warning: Could not find files $DOTBASHPROFILEPATH, $DOTBASHLOGINPATH, $DOTPROFILEPATH"
+    echo "Warning: Could not find file $DOTBASHPROFILEPATH, $DOTBASHLOGINPATH, or $DOTPROFILEPATH"
     echo "Warning: Creating $DOTPROFILEPATH"
     echo "" >> "$DOTBASHPROFILEPATH" && add_dot_source "$DOTBASHPROFILEPATH"
 fi
