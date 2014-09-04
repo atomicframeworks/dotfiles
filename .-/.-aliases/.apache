@@ -7,7 +7,7 @@ test "$SILENT" == false && echo -e "*\tApache\t\t\t\t*"
 alias apache_start='echo "Starting Apache" ; apache start'
 alias apache_stop='echo "Stopping Apache" ; apache stop'
 alias apache_restart='echo "Restarting Apache" ; apache restart'
-alias apache_reload='apache -k graceful'
+alias apache_reload='echo "Reloading Apache" ; apache -k graceful'
 alias apache_test='apache -t && apache -t -D DUMP_VHOSTS'
  
 # Open up files for editing

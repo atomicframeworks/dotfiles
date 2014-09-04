@@ -14,7 +14,7 @@ if ( os_is darwin ); then
     alias mongod_start='echo "MongoDB - Starting forked process with config file /etc/mongodb.conf"; mongod -v --config /etc/mongodb.conf; echo "MongoDB - Initialized"'
     alias mongod_stop='mongo 127.0.0.1:27017/admin --eval "db.shutdownServer()"'
     alias mongod_restart='mongod_stop; mongod'
-    alias mongod_config='open_up /etc/mongodb.conf'
+    alias mongod_config='$EDITOR /etc/mongodb.conf'
     # Needs work...
     alias mongod_default_config='sudo echo "fork = true\nbind_ip = 127.0.0.1\nport = 27017\nquiet = true\ndbpath = /data/db\nlogpath = /var/log/mongodb/mongod.log\nlogappend = true\njournal = true" > /etc/mongodb.conf '
 elif ( os_is linux ); then
@@ -22,5 +22,5 @@ elif ( os_is linux ); then
     alias mongod_start='sudo service mongodb start'
     alias mongod_stop='sudo service mongodb stop'
     alias mongod_restart='sudo service mongodb restart'
-    alias mongod_config='open_up /etc/mongodb.conf'
+    alias mongod_config='$EDITOR /etc/mongodb.conf'
 fi

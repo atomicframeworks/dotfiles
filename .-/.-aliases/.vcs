@@ -3,40 +3,42 @@
 
 test "$SILENT" == false && echo -e "*\tVCS\t\t\t\t*"
 
-# Git 
-alias git_user='git config --global user.name'
-alias git_email='git config --global user.email'
-alias git_configs='echo; cat ~/.gitconfig'
+# Git
+if (exists git); then
+    alias git_user='git config --global user.name'
+    alias git_email='git config --global user.email'
+    alias git_configs='echo; cat ~/.gitconfig'
 
-# Stop tracking a tracked file by ignoring changes
-alias git_untrack_file="git update-index --assume-unchanged"
-# Undo the stop tracking by looking at changes
-alias git_track_file="git update-index --no-assume-unchanged"
+    # Stop tracking a tracked file by ignoring changes
+    alias git_untrack_file="git update-index --assume-unchanged"
+    # Undo the stop tracking by looking at changes
+    alias git_track_file="git update-index --no-assume-unchanged"
 
-# Convience
-alias status='git status'
-alias push='git push origin'
-alias pull='git pull origin'
-# -A flag is for all files (will record file removals)
-alias add='git add -A'
-alias add_all='git add -A * && git add -A */*'
-alias commit='git commit -m'
-alias branch='git branch'
+    # Convience
+    alias status='git status'
+    alias push='git push origin'
+    alias pull='git pull origin'
+    # -A flag is for all files (will record file removals)
+    alias add='git add -A'
+    alias add_all='git add -A * && git add -A */*'
+    alias commit='git commit -m'
+    alias branch='git branch'
 
-# Push and pull for gists
-alias git_gist_pull='git pull gist master'
-alias git_gist_push='git push gist master'
+    # Push and pull for gists
+    alias git_gist_pull='git pull gist master'
+    alias git_gist_push='git push gist master'
 
-# Show list of git aliases (ones in the config - not these aliases)
-alias git_aliases='git config --get-regexp alias'
+    # Show list of git aliases (ones in the config - not these aliases)
+    alias git_aliases='git config --get-regexp alias'
 
-# Dry run git to see what files will be added
-alias git_dry='git add . -n'
-alias git_rm='git rm $(git ls-files --deleted)'
+    # Dry run git to see what files will be added
+    alias git_dry='git add . -n'
+    alias git_rm='git rm $(git ls-files --deleted)'
 
-# Test if ssh is working with git
-alias git_test_ssh='ssh -T git@github.com'
+    # Test if ssh is working with git
+    alias git_test_ssh='ssh -T git@github.com'
 
-# Undo last push by undoing last commit and pushing to remote
-alias git_undo_push='git reset --hard HEAD~1 && git push -f'
-alias git_undo_commit='git reset HEAD~'
+    # Undo last push by undoing last commit and pushing to remote
+    alias git_undo_push='git reset --hard HEAD~1 && git push -f'
+    alias git_undo_commit='git reset HEAD~'
+fi
