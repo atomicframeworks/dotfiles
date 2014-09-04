@@ -20,7 +20,7 @@ DOTPROFILEPATH=~/.profile
 add_dot_source() {
     echo "Adding $DOTFLAG in to $1"
     # Make sure file ends with a newline
-    sed -i '' -e '$a\' $1
+    sed -i '' -e '$a\' "$1"
     echo -e "$DOTFLAG\nsource \"$DOTCWD/.-/.profile\"" >> "$1"
 }
 
