@@ -55,6 +55,9 @@ exists() {
         # Only one argument - Must have 2 or 0
         echo 'Warning: You must provide a second arugment to set the config variable value.'
     else
+        # Clear out terminal because we are reloading when we resource
+        clear
+        
         # Uppercase the first argument and append equals (=)
         CONFIGVAR=($(echo $1 | awk '{print toupper($0)}'))
         CONFIGVAR=$CONFIGVAR=
@@ -77,7 +80,7 @@ exists() {
         echo "$CONFIGVAR$2" >> "$DOTCWD/.config"
         
         # Resource profile to use new settings
-        clear && . "$DOTCWD/.profile"
+        . "$DOTCWD/.profile"
     fi
 }
 
@@ -112,6 +115,34 @@ kill_process_by_name() {
 }
 kill_process_by_id() {
     kill --term $1
+}
+
+# Display the available colors
+colors() {
+	local fgc bgc vals seq0
+
+	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+	# foreground colors
+	for fgc in {30..37}; do
+		# background colors
+		for bgc in {40..47}; do
+			fgc=${fgc#37} # white
+			bgc=${bgc#40} # black
+
+			vals="${fgc:+$fgc;}${bgc}"
+			vals=${vals%%;}
+
+			seq0="${vals:+\e[${vals}m}"
+			printf "  %-9s" "${seq0:-(default)}"
+			printf " ${seq0}TEXT\e[m"
+			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+		done
+		echo; echo
+	done
 }
 
 # OS specific functions below

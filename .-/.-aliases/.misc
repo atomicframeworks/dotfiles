@@ -26,10 +26,8 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-# Colorize ls
-if test "$COLORIZE" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
-    alias ls='ls -G'
-fi
+# ls - follow . hidden directories & use units for file size
+alias ls="ls -ha"
 
 # Time & date
 alias now='date +"%T'

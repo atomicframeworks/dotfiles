@@ -8,6 +8,9 @@ DOTCWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Check if $TERM supports colors
 TPUTCOLORS=$(tput -T $TERM colors)
 
+# Cache initial prompt value for testing if modified in .-.config
+PS1CACHE=$PS1
+
 # If ~.bashrc exists include it
 if [ -f "$DOTCWD/.config" ]; then
     . "$DOTCWD/.config"

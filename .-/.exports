@@ -3,6 +3,18 @@
 
 test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 
+# PS1 - Export a more useful prompt
+# If ps1 has not changed from start then modify
+if [ "$PS1CACHE" == "$PS1" ]; then
+    if test "$COLORS" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
+        # Colorized prompt
+        export PS1="\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\033[m\]:\[\e[0;33m\]\w\[\033[m\]\$ "
+    else
+        # No colors
+        export PS1="\u@\h:\w\$ "
+    fi
+fi
+
 # EDITOR - Export default editor based on what is available for the OS
 # If already defined then skip
 if [ -z "$EDITOR" ]; then
@@ -43,6 +55,32 @@ if [ -z "$EDITOR" ]; then
 fi
 
 # If colorize is true and the $TERM supports colors then customize the prompt
-if test "$COLORIZE" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
-    export PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+if test "$COLORS" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
+    # Enable coloring
+    export CLICOLOR=1
+    
+    # Colorized grep
+    export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+   
+    # Colorized ls settings
+    # Default: LSCOLORS=exfxcxdxbxegedabagacad
+    export LSCOLORS=ExFxCxDxBxegedabagacad
+    
+    # Colorized less
+    if ( exists less ); then
+        export LESS="--RAW-CONTROL-CHARS"       
+        export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+        export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+        export LESS_TERMCAP_me=$(tput sgr0)
+        export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+        export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+        export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+        export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+        export LESS_TERMCAP_mr=$(tput rev)
+        export LESS_TERMCAP_mh=$(tput dim)
+        export LESS_TERMCAP_ZN=$(tput ssubm)
+        export LESS_TERMCAP_ZV=$(tput rsubm)
+        export LESS_TERMCAP_ZO=$(tput ssupm)
+        export LESS_TERMCAP_ZW=$(tput rsupm)
+    fi
 fi
