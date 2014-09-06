@@ -5,6 +5,9 @@
 OS=`uname`
 DOTCWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Check if $TERM supports colors
+TPUTCOLORS=$(tput -T $TERM colors)
+
 # If ~.bashrc exists include it
 if [ -f "$DOTCWD/.config" ]; then
     . "$DOTCWD/.config"
