@@ -6,7 +6,7 @@ test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 # PS1 - Export a more useful prompt
 # If ps1 has not changed from start then modify
 if [ "$PS1CACHE" == "$PS1" ]; then
-    if test "$COLORS" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
+    if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
         # Colorized prompt
         export PS1="\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\033[m\]:\[\e[0;33m\]\w\[\033[m\]\$ "
     else
@@ -55,7 +55,7 @@ if [ -z "$EDITOR" ]; then
 fi
 
 # If colorize is true and the $TERM supports colors then customize the prompt
-if test "$COLORS" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
+if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
     # Enable coloring
     export CLICOLOR=1
     
