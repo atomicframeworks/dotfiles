@@ -3,8 +3,6 @@
 
 test "$SILENT" == false && echo -e "*\tMisc\t\t\t\t*"
 
-
-
 # Symlink, clear, and history - convenience aliases
 alias symlink='ln -s'
 alias c='clear;'
@@ -156,8 +154,16 @@ if ( os_is darwin ); then
             fi
         fi
     fi
-      
 elif ( os_is linux ); then
     # Linux   
     alias system_version="lsb_release -a"
+    
+    # Copy from command line to clipboard
+    if (exists xsel); then
+        alias pbcopy='xsel --clipboard --input'
+        alias pbpaste='xsel --clipboard --output'
+    elif (exists xclip); then
+        alias pbcopy='xclip -selection clipboard'
+        alias pbpaste='xclip -selection clipboard -o'
+    fi
 fi
