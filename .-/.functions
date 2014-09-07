@@ -85,8 +85,9 @@ exists() {
 hist() {
     if [ $# -eq 0 ]; then
         history -n ; history
-    elif [ $# -eq 1 ]; then
-        history -n ; history | grep "$1"
+    else
+        searchText="$@"
+        history -n ; history | grep "$searchText"
     fi
 }
 

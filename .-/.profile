@@ -11,9 +11,6 @@ TPUTCOLORS=$(tput -T $TERM colors)
 # Cache initial prompt value for testing if modified in .-.config
 PS1CACHE=$PS1
 
-# Append the new history lines (history lines entered since the beginning of the current Bash session) to the history file.
-history -n
-
 # If .-.config exists include it
 if [ -f "$DOTCWD/.config" ]; then
     . "$DOTCWD/.config"
