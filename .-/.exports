@@ -5,9 +5,10 @@ test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 
 # PS1 - Export a more useful prompt
 # If ps1 has not changed from start then modify
-# The history command flags are:
-# -a Append the new history lines (history lines entered since the beginning of the current Bash session) to the history file.
-# -n Append the history lines not already read from the history file to the current history list. These are lines appended to the history file since the beginning of the current Bash session.
+# The color_prompt_command and prompt_commands are functions in the .-.functions file.
+#       They are functions used in PROMPT_COMMAND so they can dynamically update the time and date.
+#       Setting time/date in PS1 would make it static.
+# history -a  :  Append the new history lines (history lines entered since the beginning of the current Bash session) to the history file.
 
 if [ "$PS1CACHE" == "$PS1" ]; then
     if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
