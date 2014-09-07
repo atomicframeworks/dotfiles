@@ -15,7 +15,7 @@ if [ "$PS1CACHE" == "$PS1" ]; then
         export PROMPT_COMMAND=history\ -a && color_prompt_command
     else
         # No colors
-        export PROMPT_COMMAND=history\ -a prompt_command        
+        export PROMPT_COMMAND=history\ -a && prompt_command        
     fi
 fi
 
