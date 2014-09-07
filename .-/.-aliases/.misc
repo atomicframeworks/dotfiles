@@ -9,7 +9,8 @@ test "$SILENT" == false && echo -e "*\tMisc\t\t\t\t*"
 alias symlink='ln -s'
 alias c='clear;'
 alias h='hist'
-alias clear_history='history -c'
+# Clear history in memory and on file
+alias clear_history='history -c && cat /dev/null > ~/.bash_history'
 
 # Directory aliases
 # Make directory and create intermediate directories if not existing

@@ -93,8 +93,8 @@ fi
 export HISTCONTROL="erasedups:ignoreboth"
 
 # Larger history size
-export HISTFILESIZE=500000
-export HISTSIZE=100000
+export HISTFILESIZE=50000
+export HISTSIZE=10000
 
 if ( exists shopt ); then
     # Append history otherwise bash erases on exit
