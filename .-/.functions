@@ -47,11 +47,9 @@ exists() {
 # 2- The value to set for the flag
 .-.config() {    
     # 0 arguments - open the .-/.config file
-    if [ $# -eq 0 ];
-    then        
+    if [ $# -eq 0 ]; then
         $EDITOR "$DOTCWD/.config"
-    elif [ $# -eq 1 ];
-    then
+    elif [ $# -eq 1 ]; then
         # Only one argument - Must have 2 or 0
         echo 'Warning: You must provide a second arugment to set the config variable value.'
     else
@@ -76,7 +74,6 @@ exists() {
         fi
         echo -e "\n.-.config setting:  $CONFIGVAR$2\n";
         
-    
         echo "$CONFIGVAR$2" >> "$DOTCWD/.config"
         
         # Resource profile to use new settings
@@ -84,6 +81,23 @@ exists() {
     fi
 }
 
+# History full list or grep
+hist() {
+    if [ $# -eq 0 ]; then
+        history -n ; history
+    elif [ $# -eq 1 ]; then
+        history -n ; history | grep "$1"
+    fi
+}
+
+# Customized prompt
+# Show # if the effective UID is 0, a #, otherwise a $
+color_prompt_command() {
+    PS1="\n┏━━━ \d ━━ \@ ━━━┓\n\\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\033[m\]:\[\e[0;33m\]\w\[\033[m\]\\$ "
+}
+prompt_command() {
+    PS1="\n┏━━━ \d ━━ \@ ━━━┓\n\\u@\h:\w\\$ "
+}
 
 # Case insensitive testing if the os is linux, darwin, etc.
 os_is() {
@@ -96,7 +110,6 @@ os_is() {
         return 1
     fi
 }
-
 
 # Open with default editor for systems that do not support open
 open_up() {

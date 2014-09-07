@@ -3,19 +3,27 @@
 
 test "$SILENT" == false && echo -e "*\tMisc\t\t\t\t*"
 
+
+
 # Symlink, clear, and history - convenience aliases
 alias symlink='ln -s'
 alias c='clear;'
-alias h='history'
+alias h='hist'
+alias clear_history='history -c'
 
-# Directory
+# Directory aliases
+# Make directory and create intermediate directories if not existing
 alias md='mkdir -p'
+# Remove directory
 alias rd='rmdir'
 
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'        # Go back
+
+# List only subdirectories in the current directory
+alias subdirectories='ls -d */'
 
 # Safety - Force -i flags
 alias rm='rm -I --preserve-root'
@@ -26,8 +34,10 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-# ls - follow . hidden directories & use units for file size
-alias ls="ls -ha"
+# ls 
+# -a Include directory entries whose names begin with a dot (.).
+# -h use unit suffixes: Byte, Kilobyte, etc.
+alias ls="ls -ah"
 
 # Time & date
 alias now='date +"%T'

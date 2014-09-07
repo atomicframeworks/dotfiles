@@ -1,17 +1,21 @@
 # .-.exports 
-# Used for adding any exports
+# Used for adding any exports or shell options (shopt)
 
 test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 
 # PS1 - Export a more useful prompt
 # If ps1 has not changed from start then modify
+# The history command flags are:
+# -a Append the new history lines (history lines entered since the beginning of the current Bash session) to the history file.
+# -n Append the history lines not already read from the history file to the current history list. These are lines appended to the history file since the beginning of the current Bash session.
+
 if [ "$PS1CACHE" == "$PS1" ]; then
     if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
         # Colorized prompt
-        export PS1="\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\033[m\]:\[\e[0;33m\]\w\[\033[m\]\$ "
+        export PROMPT_COMMAND="history -a && history -n" && color_prompt_command
     else
         # No colors
-        export PS1="\u@\h:\w\$ "
+        export PROMPT_COMMAND="history -a && history -n" && prompt_command        
     fi
 fi
 
@@ -83,4 +87,18 @@ if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; the
         export LESS_TERMCAP_ZO=$(tput ssupm)
         export LESS_TERMCAP_ZW=$(tput rsupm)
     fi
+fi
+
+# Erase duplicate commands in history and ignore spaces
+export HISTCONTROL="erasedups:ignoreboth"
+
+# Larger history size
+export HISTFILESIZE=500000
+export HISTSIZE=100000
+
+if ( exists shopt ); then
+    # Append history otherwise bash erases on exit
+    shopt -s histappend
+    # Save multiline commands as one command
+    shopt -s cmdhist
 fi
