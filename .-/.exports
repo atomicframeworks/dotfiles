@@ -12,10 +12,10 @@ test "$SILENT" == false && echo -e '*  .- Exports\t\t\t\t*'
 if [ "$PS1CACHE" == "$PS1" ]; then
     if test "$COLOR" == true && test -n "$TPUTCOLORS" && test $TPUTCOLORS -ge 8; then
         # Colorized prompt
-        export PROMPT_COMMAND="history -a && history -n" && color_prompt_command
+        export PROMPT_COMMAND=color_prompt_command
     else
         # No colors
-        export PROMPT_COMMAND="history -a && history -n" && prompt_command        
+        export PROMPT_COMMAND=prompt_command        
     fi
 fi
 

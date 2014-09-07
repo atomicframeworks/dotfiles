@@ -11,7 +11,10 @@ TPUTCOLORS=$(tput -T $TERM colors)
 # Cache initial prompt value for testing if modified in .-.config
 PS1CACHE=$PS1
 
-# If ~.bashrc exists include it
+# Append the new history lines (history lines entered since the beginning of the current Bash session) to the history file.
+history -n
+
+# If .-.config exists include it
 if [ -f "$DOTCWD/.config" ]; then
     . "$DOTCWD/.config"
 fi
@@ -33,6 +36,17 @@ test "$SILENT" == false && echo -e '\n*****************************************\
 if [ -f ~/.bashrc ]; then
     test "$SILENT" == false && echo -e "*  .- Sourced in ~/.bashrc file\t\t*"
     . ~/.bashrc
+fi
+
+# If bash completion exists source it in
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# If inputrc does not exists create it with options
+if [ ! -f ~/.inputrc -a ! -f /etc/inputrc ]; then
+    test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*  Adding options to ~/.inputrc \t*'
+    echo -e "set completion-ignore-case on\nset show-all-if-ambiguous on\nset show-all-if-unmodified on" >> ~/.inputrc
 fi
 
 # Load the shell dotfiles and create edit aliases for them
