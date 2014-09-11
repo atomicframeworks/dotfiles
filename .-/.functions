@@ -91,6 +91,18 @@ hist() {
     fi
 }
 
+# Wiki search
+if ( exists dig ); then 
+    wiki() {
+        dig +short txt "$@".wp.dg.cx
+    }
+elif ( exists nslookup ); then
+    wiki() {
+        nslookup -q=txt "$1".wp.dg.cx
+    }
+fi
+
+
 # Customized prompt
 # Show # if the effective UID is 0, a #, otherwise a $
 color_prompt_command() {
