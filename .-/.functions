@@ -102,7 +102,6 @@ elif ( exists nslookup ); then
     }
 fi
 
-
 # Customized prompt
 # Show # if the effective UID is 0, a #, otherwise a $
 color_prompt_command() {
@@ -366,4 +365,25 @@ EOF
     # Convenience aliases
     alias newTab="new_tab"
     alias newWin="new_win"
+    
+    # List members of group
+    group_members() {
+        # Input check and usage
+        if [[ $# != 1 || $1 == -* || $1 =~ [[:space:]] ]]; then
+            echo "Usage: ${0##*/} groupname" >&2
+            echo "Lists all members of the group." >&2
+        elif (dsmemberutil checkmembership -U root -G "$1" 2>&1 \
+            | grep "group .* cannot be found") >&2; then
+            :
+        else
+            # Check every user
+            exec dscl . -list /Users \
+              | while read each_username
+              do
+                printf "$each_username "
+                dsmemberutil checkmembership -U "$each_username" -G "$1"
+              done \
+                | grep "is a member" | cut -d " " -f 1
+        fi
+    }
 fi

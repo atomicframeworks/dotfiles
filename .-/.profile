@@ -52,7 +52,7 @@ for file in .{paths,functions,exports,aliases,extras}; do
 done;
 
 # Manually add profile, bootstrap, and config aliases as part of core profile
-alias .-.profile="$EDITOR \"$DOTCWD/.profile\"";
-alias .-.bootstrap="$EDITOR \"$DOTCWD/../bootstrap.sh\"";
+alias .-.profile="\$EDITOR \"$DOTCWD/.profile\"";
+alias .-.bootstrap="\$EDITOR \"$DOTCWD/../bootstrap.sh\"";
 
 test "$SILENT" == false && echo -e '*\t\t\t\t\t*\n*****************************************\n';

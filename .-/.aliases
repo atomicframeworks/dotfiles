@@ -11,7 +11,7 @@ SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 # Load all dot files in .-aliases folder
 for aliasFile in $DOTCWD/.-aliases/.*; do
-    [ -r $aliasFile ] && [ -f $aliasFile ] && . $aliasFile && alias ${aliasFile/*.-aliases\//.-.aliases}="$EDITOR \"$aliasFile\"" 
+    [ -r $aliasFile ] && [ -f $aliasFile ] && . $aliasFile && alias ${aliasFile/*.-aliases\//.-.aliases}="\$EDITOR \"$aliasFile\"" 
 done;
 # Revert to old IFS
 IFS=$SAVEIFS
