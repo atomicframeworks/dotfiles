@@ -102,6 +102,13 @@ elif ( exists nslookup ); then
     }
 fi
 
+# Say the wiki search
+if ( exists say ); then
+    wiki_say() {
+        wiki "$@" | say
+    }
+fi
+
 # Customized prompt
 # Show # if the effective UID is 0, a #, otherwise a $
 color_prompt_command() {
