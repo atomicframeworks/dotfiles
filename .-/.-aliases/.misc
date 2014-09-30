@@ -103,7 +103,7 @@ if ( os_is darwin ); then
     # If sublime is not symlinked - do so if possible
     if (! exists subl); then
         # Find the first Sublime Text*.app file in either /Applications or ~/Applications
-        sublimePath=`find /Applications ~/Applications -d -maxdepth 1 -iname "Sublime Text*.app" | head -1`
+        sublimePath=`find /Applications ~/Applications -d -maxdepth 1 -iname "Sublime Text*.app" 2>/dev/null | head -1`
         # If we found a file
         if [ -a "$sublimePath/Contents/SharedSupport/bin/subl" ]; then
             # Add full path to $sublimePath var
