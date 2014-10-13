@@ -38,10 +38,15 @@ alias chgrp='chgrp --preserve-root'
 # -h use unit suffixes: Byte, Kilobyte, etc.
 alias ls="ls -ah"
 
+# Helpers to list directories & files
+alias list_directories='du -sh * | sort -rn'
+alias list_hidden_files_recursively='find . -name ".*" -print'
+alias remove_hidden_files_recursively='find . -name ".*" -exec rm -rf {} \;'
+
 # Time & date
 alias now='date +"%T'
-alias nowtime=now
-alias nowdate='date +"%d-%m-%Y"'
+alias now_time=now
+alias now_date='date +"%d-%m-%Y"'
 
 # Web server 
 alias nginx_reload='sudo /usr/local/nginx/sbin/nginx -s reload'
@@ -65,7 +70,14 @@ fi
 if ( os_is darwin ); then
     # OSX
     
-    # Remove Where From tag from mp3
+    # Flush DNS
+	# Mountain Lion or Lion
+	#alias flush_dns="sudo killall -HUP mDNSResponder"
+	
+	# OSX v10.6+
+	alias flush_dns="sudo dscacheutil -flushcache"
+	
+	# Remove Where From tag from mp3
     alias remove_where_tag="xattr -d com.apple.metadata:kMDItemWhereFroms ./*.*"
     
     # Grant or remove admin rights
