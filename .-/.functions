@@ -145,6 +145,9 @@ get_process_by_name() {
 kill_process_by_name() {
     pkill $1
 }
+kill_all_processes_by_name() {
+	killall $1
+}
 kill_process_by_id() {
     kill --term $1
 }

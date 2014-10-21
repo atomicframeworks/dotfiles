@@ -29,12 +29,12 @@ fi
 
 # Sites available
 if [ -f /etc/apache2/sites-available ]; then
-    alias sites_available='echo; echo Sites Available:; echo; cd /etc/apache2/sites-available; ls; echo'
+    alias apache_sites_available='echo; echo Sites Available:; echo; cd /etc/apache2/sites-available; ls; echo'
 fi
 
 # Sites enabled
 if [ -f /etc/apache2/sites-enabled ]; then
-    alias sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/apache2/sites-enabled; ls; echo'
+    alias apache_sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/apache2/sites-enabled; ls; echo'
 fi
 
 # httpd.conf

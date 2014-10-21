@@ -1,0 +1,33 @@
+# .-.aliases.nginx
+# Used to add anything Nginx specific
+
+test "$SILENT" == false && echo -e "*\tNginx\t\t\t\t*"
+
+# Convenience aliases 
+if [ -f /etc/init.d/nginx ]; then
+	alias nginx_start='echo " * Starting nginx"; sudo service nginx start'
+	alias nginx_stop='echo " * Stopping nginx"; sudo service nginx stop'
+	alias nginx_restart='sudo service nginx restart'
+	alias nginx_reload='sudo service nginx reload'
+	alias nginx_test='sudo service nginx configtest'
+fi
+
+if [ -f /etc/nginx/sites-available ]; then
+    alias nginx_sites_available='echo; echo Sites Available:; echo; cd /etc/nginx/sites-available; ls; echo'	
+fi
+
+if [ -f /etc/nginx/sites-enabled ]; then
+    alias nginx_sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/nginx/sites-enabled; ls; echo'
+fi
+
+if [ -f /etc/nginx/nginx.conf ]; then
+	alias nginx_config='sudo $EDITOR /etc/nginx/nginx.conf'
+fi
+
+if [ -f /var/log/nginx/error.log ]; then
+	alias nginx_error_logs='sudo $EDITOR /var/log/nginx/error.log'
+fi
+
+if [ -f /var/log/nginx/access.log ]; then
+	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
+fi

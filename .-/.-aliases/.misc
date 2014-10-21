@@ -48,9 +48,7 @@ alias now='date +"%T'
 alias now_time=now
 alias now_date='date +"%d-%m-%Y"'
 
-# Web server 
-alias nginx_reload='sudo /usr/local/nginx/sbin/nginx -s reload'
-alias nginx_test='sudo /usr/local/nginx/sbin/nginx -t'
+# lighttpd Web server 
 alias lighty_load='sudo /etc/init.d/lighttpd reload'
 alias lighty_test='sudo /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t'
 
