@@ -4,7 +4,6 @@
 # Determine nginx path for OS X or Ubuntu
 nginxPath=`find /etc/nginx /usr/local/etc/nginx -d -maxdepth 1 -iname "nginx" 2>/dev/null | head -1`
 
-
 # Check if the path is a directory
 if [ -d "$nginxPath" ]; then
     test "$SILENT" == false && echo -e "*\tNginx\t\t\t\t*"
