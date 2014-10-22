@@ -1,33 +1,40 @@
 # .-.aliases.nginx
 # Used to add anything Nginx specific
 
-test "$SILENT" == false && echo -e "*\tNginx\t\t\t\t*"
+# Determine nginx path for OS X or Ubuntu
+nginxPath=`find /etc/nginx /usr/local/etc/nginx -d -maxdepth 1 -iname "nginx" 2>/dev/null | head -1`
 
-# Convenience aliases 
-if [ -f /etc/init.d/nginx ]; then
-	alias nginx_start='echo " * Starting nginx"; sudo service nginx start'
-	alias nginx_stop='echo " * Stopping nginx"; sudo service nginx stop'
-	alias nginx_restart='sudo service nginx restart'
-	alias nginx_reload='sudo service nginx reload'
-	alias nginx_test='sudo service nginx configtest'
-fi
 
-if [ -f /etc/nginx/sites-available ]; then
-    alias nginx_sites_available='echo; echo Sites Available:; echo; cd /etc/nginx/sites-available; ls; echo'	
-fi
+# Check if the path is a directory
+if [ -d "$nginxPath" ]; then
+    test "$SILENT" == false && echo -e "*\tNginx\t\t\t\t*"
+    
+    # Convenience aliases 
+    if [ -f /etc/init.d/nginx ]; then
+    	alias nginx_start='echo " * Starting nginx"; sudo service nginx start'
+    	alias nginx_stop='echo " * Stopping nginx"; sudo service nginx stop'
+    	alias nginx_restart='sudo service nginx restart'
+    	alias nginx_reload='sudo service nginx reload'
+    	alias nginx_test='sudo service nginx configtest'
+    fi
+    
+    if [ -d "$nginxPath/sites-available" ]; then
+        alias nginx_sites_available='echo; echo Sites Available:; echo; cd $nginxPath/sites-available; ls; echo'	
+    fi
 
-if [ -f /etc/nginx/sites-enabled ]; then
-    alias nginx_sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/nginx/sites-enabled; ls; echo'
-fi
+    if [ -d "$nginxPath/sites-enabled" ]; then
+        alias nginx_sites_enabled='echo; echo Sites Enabled:; echo; cd $nginxPath/sites-enabled; ls; echo'
+    fi
 
-if [ -f /etc/nginx/nginx.conf ]; then
-	alias nginx_config='sudo $EDITOR /etc/nginx/nginx.conf'
-fi
+    if [ -f "$nginxPath/nginx.conf" ]; then
+    	alias nginx_config='sudo $EDITOR $nginxPath/nginx.conf'
+    fi
 
-if [ -f /var/log/nginx/error.log ]; then
-	alias nginx_error_logs='sudo $EDITOR /var/log/nginx/error.log'
-fi
+    if [ -f /var/log/nginx/error.log ]; then
+    	alias nginx_error_logs='sudo $EDITOR /var/log/nginx/error.log'
+    fi
 
-if [ -f /var/log/nginx/access.log ]; then
-	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
+    if [ -f /var/log/nginx/access.log ]; then
+    	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
+    fi
 fi
