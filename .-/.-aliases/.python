@@ -4,4 +4,8 @@
 if (exists python); then
     test "$SILENT" == false && echo -e "*\tPython\t\t\t\t*"
     alias python_serve='python -m SimpleHTTPServer'
+    
+    if ( exists python3 ); then
+        alias python='python3'
+    fi
 fi
