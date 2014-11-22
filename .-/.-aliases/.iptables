@@ -5,7 +5,8 @@ test "$SILENT" == false && echo -e "*\tIptables\t\t\t*"
 
 # Save iptables rules to file
 alias iptables_save='sudo iptables-save | sudo tee /etc/iptables.up.rules'
-alias iptables_list='sudo iptables -L --line-numbers'
+alias iptables_list_rules='sudo iptables -L --line-numbers'
+alias iptables_remove_rule_number='sudo iptables -D INPUT'
 
 # Open tcp port in iptables
 iptables_open_port() {
