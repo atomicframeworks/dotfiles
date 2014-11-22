@@ -8,7 +8,7 @@ alias iptables_save='sudo iptables-save | sudo tee /etc/iptables.up.rules'
 
 # Open tcp port in iptables
 iptables_open_port() {
-    sudo iptables -I INPUT 1 -p tcp --dport $1 -j ACCEPT
+    sudo iptables -I INPUT 1 -p tcp --dport $1 -j ACCEPT && echo 'Set iptables rule: -I INPUT 1 -p tcp --dport $1 -j ACCEPT'
 }
 
 # Setup script to restore iptables on restart
