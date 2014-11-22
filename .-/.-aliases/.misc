@@ -180,8 +180,6 @@ fi
 
 # rmate - activate TextMate from an ssh session
 # https://github.com/textmate/rmate
-if (exists ruby); then
-    if [ ! -f ~/bin/rmate ]; then
-        sudo curl -Lo ~/bin/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate && sudo chmod a+x ~/bin/rmate && echo 'Installed rmate to ~/bin/rmate'
-    fi
+if [ ! -f ~/bin/rmate ]; then
+    sudo curl -Lo ~/bin/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate && sudo chmod a+x ~/bin/rmate && echo 'Installed rmate to ~/bin/rmate'
 fi
