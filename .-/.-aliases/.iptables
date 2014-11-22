@@ -18,6 +18,6 @@ if [ ! -f "/etc/network/if-pre-up.d/iptables" ]; then
     if [ -f /etc/iptables.up.rules ]; then
         # Create start up script to start the firewall on system restart
         # Had some issues here - had to copy a file in the /etc/network/if-pre-up.d/ to create the new/etc/network/if-pre-up.d/iptables file
-        echo -e '#!/bin/sh\rsudo /sbin/iptables-restore < /etc/iptables.up.rules' | sudo tee "/etc/network/if-pre-up.d/iptables" && sudo chmod +x /etc/network/if-pre-up.d/iptables && echo "Created script to on server restart restore iptables settings from file /etc/iptables.up.rules"
+        echo -e '#!/bin/sh\rsudo /sbin/iptables-restore < /etc/iptables.up.rules' | sudo tee "/etc/network/if-pre-up.d/iptables" && sudo chmod +x /etc/network/if-pre-up.d/iptables && echo "Created script '/etc/network/if-pre-up.d/iptables'. It will restore iptables settings from file /etc/iptables.up.rules when the server restarts."
     fi
 fi
