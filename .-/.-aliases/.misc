@@ -180,6 +180,10 @@ fi
 
 # rmate - activate TextMate from an ssh session
 # https://github.com/textmate/rmate
+# In order to use rmate on your remote server you will need to use port forwarding with ssh. 
+# The default rmate port is 52698 so make sure the server's firewall supports this
+# Example: 
+# alias rmate_tunnel='ssh -R 52698:localhost:52698 user@domain -p 22'
 if [ ! -f ~/bin/rmate ]; then
     sudo curl -Lo ~/bin/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate && sudo chmod a+x ~/bin/rmate && echo 'Installed rmate to ~/bin/rmate'
 fi
