@@ -36,4 +36,23 @@ if [ -d "$nginxPath" ]; then
     if [ -f /var/log/nginx/access.log ]; then
     	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
     fi
+    
+    # Symlink a site from sites-available to sites-enabled directory
+    nginx_enable_site() {
+        if [ -f "$nginxPath/sites-available/$1" ]; then
+            sudo ln "$nginxPath/sites-available/$1" "$nginxPath/sites-enabled/$1"
+        else
+            echo "Site: $1 -- Does not exist in $nginxPath/sites-available"
+        fi
+    }
+    
+    # Remove symlink from sites-enabled directory
+    nginx_disable_site() {
+        if [ -f "$nginxPath/sites-enabled/$1" ]; then
+            rm "$nginxPath/sites-enabled/$1"
+        else
+            echo "Site: $1 -- Does not exist in $nginxPath/sites-enabled"
+        fi
+    }
+    
 fi
