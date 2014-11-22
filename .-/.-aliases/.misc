@@ -177,3 +177,9 @@ elif ( os_is linux ); then
         alias pbpaste='xclip -selection clipboard -o'
     fi
 fi
+
+# rmate - activate TextMate from an ssh session
+# https://github.com/textmate/rmate
+if [ -f ~/bin/rmate ]; then
+    curl -Lo ~/bin/rmate https://raw.github.com/textmate/rmate/master/bin/rmate && chmod a+x ~/bin/rmate && echo 'Installed rmate to ~/bin/rmate'
+fi

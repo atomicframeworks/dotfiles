@@ -55,4 +55,64 @@ if [ -d "$nginxPath" ]; then
         fi
     }
     
+    # Remove symlink from sites-enabled directory
+    nginx_disable_site() {
+        if [ -f "$nginxPath/sites-enabled/$1" ]; then
+            rm "$nginxPath/sites-enabled/$1"
+        else
+            echo "Site: $1 -- Does not exist in $nginxPath/sites-enabled"
+        fi
+    }
+    
+    # Setup for creating a new site
+    nginx_new_site() {
+    
+        # Where the project files will live
+        printf "Web root (/var/www/): "
+        read webRoot
+    
+        while [ ! -d "$webRoot" ]; do
+            printf "Invalid directory\n"
+            printf "Web root (/var/www/): "
+            read webRoot
+        done
+    
+        # Name of the site we are creating
+        printf "Domain name (www.example.com): "
+        read domainName
+        sudo mkdir -p "$webRoot/$domainName" && echo "Created directory: $webRoot/$domainName"
+    
+    
+        # Name of the user serving site
+        printf "Web server user (www-data): "
+        read userName
+        sudo chown -R "$userName:$userName" "$webRoot/$domainName" && echo "Set $userName as owner on $webRoot/$domainName"
+    
+        # Create the virrtual hosts file
+        sudo cp "$nginxPath/sites-available/default" "$nginxPath/sites-available/$domain" && echo "Created virtual host file: $nginxPath/sites-available/$domain"
+        
+        # Ask if they want to edit the hosts file
+        while true; do
+            read -p "Do you wish to edit this virtual hosts file?" yn
+            case $yn in
+                [Yy]* ) "$EDITOR $nginxPath/sites-available/$domain"; break;;
+                [Nn]* ) exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+  
+        echo "Site $domainName created as an available site."
+  
+        # Ask if they want to enable the site
+        while true; do
+            read -p "Do you wish to enable this site?" yn
+            case $yn in
+                [Yy]* ) nginx_enable_site "$domainName"; break;;
+                [Nn]* ) echo "In order to enable it run the command 'nginx_enable_site $domainName'" && exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+    
+        echo "Fin."
+    } 
 fi
