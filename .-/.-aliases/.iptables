@@ -1,7 +1,7 @@
 # .-.aliases.iptables
 # Used to add anything iptables specific
 
-test "$SILENT" == false && echo -e "*\tIptables\t\t\t\t*"
+test "$SILENT" == false && echo -e "*\tIptables\t\t\t*"
 
 # Save iptables rules to file
 alias iptables_save='sudo iptables-save | sudo tee /etc/iptables.up.rules'
@@ -12,7 +12,7 @@ iptables_open_port() {
 }
 
 # Setup script to restore iptables on restart
-if [ ! -f "/etc/network/if-pre-up.d/iptables"]; then
+if [ ! -f "/etc/network/if-pre-up.d/iptables" ]; then
     if [ -f /etc/iptables.up.rules ]; then
         # Create start up script to start the firewall on system restart
         # Had some issues here - had to copy a file in the /etc/network/if-pre-up.d/ to create the new/etc/network/if-pre-up.d/iptables file
