@@ -31,3 +31,9 @@ fi
 if [ -f /var/log/nginx/access.log ]; then
 	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
 fi
+
+nginx_enable_site () {
+	if [ -f /etc/nginx/sites-available/$1 ]; then
+		ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
+	fi
+}
