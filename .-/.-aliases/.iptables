@@ -1,0 +1,23 @@
+# .-.aliases.iptables
+# Used to add anything iptables specific
+
+test "$SILENT" == false && echo -e "*\tIptables\t\t\t*"
+
+# Save iptables rules to file
+alias iptables_save='sudo iptables-save | sudo tee /etc/iptables.up.rules'
+alias iptables_list_rules='sudo iptables -L --line-numbers'
+alias iptables_remove_rule_number='sudo iptables -D INPUT'
+
+# Open tcp port in iptables
+iptables_open_port() {
+    sudo iptables -I INPUT 1 -p tcp --dport $1 -j ACCEPT && echo 'Set iptables rule: -I INPUT 1 -p tcp --dport $1 -j ACCEPT'
+}
+
+# Setup script to restore iptables on restart
+if [ ! -f "/etc/network/if-pre-up.d/iptables" ]; then
+    if [ -f /etc/iptables.up.rules ]; then
+        # Create start up script to start the firewall on system restart
+        # Had some issues here - had to copy a file in the /etc/network/if-pre-up.d/ to create the new/etc/network/if-pre-up.d/iptables file
+        echo -e '#!/bin/sh\rsudo /sbin/iptables-restore < /etc/iptables.up.rules' | sudo tee "/etc/network/if-pre-up.d/iptables" && sudo chmod +x /etc/network/if-pre-up.d/iptables && echo "Created script '/etc/network/if-pre-up.d/iptables'. It will restore iptables settings from file /etc/iptables.up.rules when the server restarts."
+    fi
+fi

@@ -16,8 +16,9 @@ done;
 # Revert to old IFS
 IFS=$SAVEIFS
 
-# Update the .- dotfiles repo
-alias .-.update="(cd $DOTCWD/../; git pull origin master)"
+# Update the .- dotfiles repo & source it in to pick up changes
+alias .-.update="(cd $DOTCWD/../; git pull origin master && . $DOTCWD/.profile)"
+alias .-.reload=". $DOTCWD/.profile"
 
 # Profiles - Open for editing
 alias bash_profile='$EDITOR ~/.bash_profile'
