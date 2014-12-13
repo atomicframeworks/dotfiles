@@ -41,4 +41,60 @@ if (exists git); then
     # Undo last push by undoing last commit and pushing to remote
     alias git_undo_push='git reset --hard HEAD~1 && git push -f'
     alias git_undo_commit='git reset HEAD~'
+	
+	# Init a bare copy of a git project on a remote server
+	# This allows the remote server to now be used as a remote repository
+	# Will also set the the remote server as origin for local copy
+	git_init_remote() {
+	    read -p "Local git directory:" localGitDirectory
+	    read -p "Remote User:" remoteUser
+	    read -p "Remote Domain:" remoteDomain
+	    read -p "Remote Port (22):" remotePort
+	    read -r -p "Remote git directory:" remoteGitDirectory
+    
+	    # Make the directory on the server
+	    echo "Creating folder on remote server"
+	    ssh -p $remotePort -t "$remoteUser"@"$remoteDomain" "mkdir -p $remoteGitDirectory"
+    
+	    # Go to the local repo and copy a bare git clone to the remote server
+	    cd $localGitDirectory
+	    # Reinit to ensure there is a git directory
+	    git init >/dev/null 2>&1
+		
+	    # Clone to new temp bare git directory
+	    echo "Creating and copying temp bare git derectory to remote server..."
+		git clone -l ./ ./git_bare_temp --bare 
+		# Push bare to server
+	    rsync -av --progress --inplace --rsh="ssh -p$remotePort" ./git_bare_temp/* "$remoteUser"@"$remoteDomain":"$remoteGitDirectory"
+	    echo 'done.'
+		
+	    # Remove temp dir
+	    echo 'Removing temp directory...'
+	    rm -drf git_bare_temp/
+	    echo 'done.'
+    
+	    # Update the origin to point at the new remote
+	    echo 'Removing current git origin.'
+	    git remote rm origin >/dev/null 2>&1
+	    echo "Adding the remote origin: ssh://$remoteUser@$remoteDomain:$remotePort/$remoteGitDirectory"
+	    git remote add origin ssh://"$remoteUser"@"$remoteDomain":"$remotePort"/"$remoteGitDirectory"
+	    echo "Setting the push upstream to origin master: git push --set-upstream origin master"
+	    git push --set-upstream origin master >/dev/null 2>&1
+	    echo 'Fin.'
+	}
+	
+	# Clone a remote git repository via ssh
+	git_clone_remote() {
+	    read -p "Remote User:" remoteUser
+	    read -p "Remote Domain:" remoteDomain
+	    read -p "Remote Port (22):" remotePort
+		# Note this is a absolute path 
+		# If we wanted to use relative (to the users home) path we can simply pass in ~/dir/example when asked for remote git directory
+	    read -r -p "Remote git directory:" remoteGitDirectory
+	    
+		echo "Cloning remote git directory ..."		
+		git clone ssh://$remoteUser@$remoteDomain:$remotePort/"remoteGitDirectory"
+	    echo 'done.'
+	}
+	
 fi
