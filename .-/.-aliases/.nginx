@@ -32,8 +32,16 @@ if [ -f /var/log/nginx/access.log ]; then
 	alias nginx_access_logs='sudo $EDITOR /var/log/nginx/access.log'
 fi
 
+# Symlink an available site to enabled sites
 nginx_enable_site () {
 	if [ -f /etc/nginx/sites-available/$1 ]; then
 		ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
+	fi
+}
+
+# Create a new site from the default config and open for editing
+nginx_new_site () {
+	if [ -f /etc/nginx/sites-available/$1 ]; then
+		cp /etc/nginx/sites-available/default /etc/nginx/sites-available/$1 && $EDITOR /etc/nginx/sites-available/$1
 	fi
 }
