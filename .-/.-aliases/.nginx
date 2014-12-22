@@ -12,11 +12,11 @@ if [ -f /etc/init.d/nginx ]; then
 	alias nginx_test='sudo service nginx configtest'
 fi
 
-if [ -f /etc/nginx/sites-available ]; then
+if [ -d /etc/nginx/sites-available ]; then
     alias nginx_sites_available='echo; echo Sites Available:; echo; cd /etc/nginx/sites-available; ls; echo'	
 fi
 
-if [ -f /etc/nginx/sites-enabled ]; then
+if [ -d /etc/nginx/sites-enabled ]; then
     alias nginx_sites_enabled='echo; echo Sites Enabled:; echo; cd /etc/nginx/sites-enabled; ls; echo'
 fi
 
