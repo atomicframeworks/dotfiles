@@ -35,7 +35,7 @@ fi
 # Symlink an available site to enabled sites
 nginx_enable_site () {
 	if [ -f /etc/nginx/sites-available/$1 ]; then
-		ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
+		sudo ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
 	fi
 }
 
