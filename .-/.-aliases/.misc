@@ -25,7 +25,6 @@ alias -- -='cd -'        # Go back
 alias subdirectories='ls -d */'
 
 # Safety - Force -i flags
-alias rm='rm -I --preserve-root'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
