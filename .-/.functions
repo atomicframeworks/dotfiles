@@ -112,7 +112,7 @@ fi
 # Customized prompt
 # Show # if the effective UID is 0, a #, otherwise a $
 color_prompt_command() {
-    PS1="\n┏━━━ \d ━━ \@ ━━━┓\n\\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\033[m\]:\[\e[0;33m\]\w\[\033[m\]\\$ "
+    PS1="\n┏━━━ \d ━━ \@ ━━━┓\n\\[\e[0;34m\]\u\[\033[m\]@\[\033[32m\]\h\[\033[m\]:\[\e[0;33m\]\w\[\033[m\]\\$ "
 }
 prompt_command() {
     PS1="\n┏━━━ \d ━━ \@ ━━━┓\n\\u@\h:\w\\$ "
