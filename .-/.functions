@@ -8,21 +8,29 @@ test "$SILENT" == false && echo -e '*  .- Functions\t\t\t\t*'
 auto_restart_process() {
     
     # Check if the process is already running
-    auto_process_count="$(ps ax | grep 'mythbackend' | grep -v grep | wc -l)"
-    
-    # Run an infinite loop
-    while true;
-    do
-        # If the process is running exit
-        if [ $auto_process_count == 0 ]; then
-            $1;
-        else
-            exit 1
-        fi
-        
-        # Check the exit status of command - code 128 + signal number kills the command
-        test $? -gt 128 && break;
-    done
+    auto_process_count="$(ps ax | grep $1 | grep -v grep | wc -l)"
+
+    # If the process is running print the notice
+    if [ $auto_process_count == 0 ]; then
+				times_process_started=0;
+		    # Process is not running so run process in an infinite loop
+		    while [ $auto_process_count == 0 ]
+		    do
+						# Check the process count each time it's restarted
+						auto_process_count="$(ps ax | grep $1 | grep -v grep | wc -l)"
+				    if [ $auto_process_count == 0 ]; then
+								((times_process_started++));
+								echo "Starting process: $1, times started: $times_process_started";
+				        $1;
+				    else
+								echo "Process already running: $1" && break;
+				    fi    
+		        # Check the exit status of command - code 128 + signal number kills the command
+		        test $? -gt 128 && break;
+		    done
+    else
+				echo "Process already running: $1";
+    fi
 }
 
 # Make sure file ends with a newline
@@ -43,7 +51,7 @@ exists() {
 # .-.config - Function to set config variables or open the file
 # Arguments:
 # Passing no arguments will simply open the .-/.config file
-# 1- The config flag such as DOTSILENT
+# 1- The config flag such as SILENT
 # 2- The value to set for the flag
 .-.config() {    
     # 0 arguments - open the .-/.config file
