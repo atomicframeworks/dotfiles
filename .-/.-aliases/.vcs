@@ -46,7 +46,7 @@ if (exists git); then
 	# This allows the remote server to now be used as a remote repository
 	# Will also set the the remote server as origin for local copy
 	git_init_remote() {
-	    read -p "Local git directory:" localGitDirectory
+	    read -p "Local git directory:" -e localGitDirectory
 	    read -p "Remote User:" remoteUser
 	    read -p "Remote Domain:" remoteDomain
 	    read -p "Remote Port (22):" remotePort
@@ -57,7 +57,9 @@ if (exists git); then
 	    ssh -p $remotePort -t "$remoteUser"@"$remoteDomain" "mkdir -p $remoteGitDirectory"
     
 	    # Go to the local repo and copy a bare git clone to the remote server
-			if [ -d "$localGitDirectory" ]; then
+			# Expand any characters ~ since read treats it as a string literal
+			eval localGitDirectory=$localGitDirectory
+			if [ -d $localGitDirectory ]; then
 		    cd $localGitDirectory
 			else
 				mkdir -p $localGitDirectory && cd $localGitDirectory
