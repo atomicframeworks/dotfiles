@@ -57,15 +57,19 @@ if (exists git); then
 	    ssh -p $remotePort -t "$remoteUser"@"$remoteDomain" "mkdir -p $remoteGitDirectory"
     
 	    # Go to the local repo and copy a bare git clone to the remote server
-	    cd $localGitDirectory
+			if [ -d "$localGitDirectory" ]; then
+		    cd $localGitDirectory
+			else
+				mkdir -p $localGitDirectory && cd $localGitDirectory
+			fi
 	    # Reinit to ensure there is a git directory
 	    git init >/dev/null 2>&1
 		
 	    # Clone to new temp bare git directory
 	    echo "Creating and copying temp bare git derectory to remote server..."
-		git clone -l ./ ./git_bare_temp --bare 
-		# Push bare to server
-	    rsync -av --progress --inplace --rsh="ssh -p$remotePort" ./git_bare_temp/* "$remoteUser"@"$remoteDomain":"$remoteGitDirectory"
+			git clone -l ./ ./git_bare_temp --bare 
+			# Push bare to server
+	    rsync -av --progress --inplace --rsh="ssh -p $remotePort" ./git_bare_temp/* "$remoteUser"@"$remoteDomain":"$remoteGitDirectory"
 	    echo 'done.'
 		
 	    # Remove temp dir
