@@ -94,12 +94,17 @@ if (exists git); then
 	    read -p "Remote User:" remoteUser
 	    read -p "Remote Domain:" remoteDomain
 	    read -p "Remote Port (22):" remotePort
-		# Note this is a absolute path 
-		# If we wanted to use relative (to the users home) path we can simply pass in ~/dir/example when asked for remote git directory
+			# Note this is a absolute path 
+			# If we wanted to use relative (to the users home) path we can simply pass in ~/dir/example when asked for remote git directory
 	    read -r -p "Remote git directory:" remoteGitDirectory
-	    
-		echo "Cloning remote git directory ..."		
-		git clone ssh://$remoteUser@$remoteDomain:$remotePort/"remoteGitDirectory"
+	    read -r -p "Local directory:" localDirectory
+
+	    echo "Ensuring local directory is created..."
+			mkdir -p localDirectory
+	    echo 'done.'
+
+			echo "Cloning remote git directory ..."	
+			git clone ssh://$remoteUser@$remoteDomain:$remotePort/"$remoteGitDirectory" $localDirectory
 	    echo 'done.'
 	}
 	
