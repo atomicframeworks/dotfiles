@@ -24,3 +24,13 @@ if [[ ":$PATH:" != *":$HOME/bin/mongodb/bin:"* ]]; then
         export PATH="$HOME/bin/mongodb/bin:$PATH"
     fi
 fi
+
+# Add VS Coode
+if [[ ":$PATH:" != *":/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:"* ]]; then
+	echo 'not in path'
+    if [ -d /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin ]; then
+		echo 'adding path'
+	
+        export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
+    fi
+fi
