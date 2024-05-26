@@ -27,10 +27,7 @@ fi
 
 # Add VS Coode
 if [[ ":$PATH:" != *":/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:"* ]]; then
-	echo 'not in path'
-    if [ -d /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin ]; then
-		echo 'adding path'
-	
+    if [ -d /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin ]; then	
         export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
     fi
 fi
